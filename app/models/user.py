@@ -1,6 +1,8 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from datetime import datetime
+
 
 
 class User(db.Model, UserMixin):
@@ -13,6 +15,15 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    first_name = db.Column(db.String(255), nullable=False)
+    last_name = db.Column(db.String(255), nullable=False)
+    is_artist = db.Column(db.Boolean, nullable=False)
+    artist_name = db.Column(db.String(255), nullable=True, unique=True)
+    artist_country = db.Column(db.String(255), nullable=True)
+    artist_bio = db.Column(db.String(2000), nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate = datetime.now)
+
 
     songs = db.relationship('Song', back_populates='user')
     comments = db.relationship('Comment', back_populates='user')

@@ -17,8 +17,8 @@ class Song(db.Model):
     plays = db.Column(db.Integer)
     genres = db.Column(db.String, nullable=False)
     is_private = db.Column(db.Boolean, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
-    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now, onupdate = datetime.now)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate = datetime.now)
 
     user = db.relationship('User', back_populates='songs')
     comments = db.relationship('Comment', back_populates='song')
