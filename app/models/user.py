@@ -24,6 +24,7 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate = datetime.now)
 
+    songs = db.relationship('Song', back_populates='user')
 
     songs = db.relationship('Song', back_populates='user')
     comments = db.relationship('Comment', back_populates='user')
