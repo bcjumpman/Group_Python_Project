@@ -26,7 +26,7 @@ def upgrade():
     sa.Column('duration', sa.Integer(), nullable=False),
     sa.Column('cover_art', sa.String(), nullable=False),
     sa.Column('plays', sa.Integer(), nullable=True),
-    sa.Column('genres', sa.String(), nullable=False),
+    sa.Column('genre', sa.String(), nullable=False),
     sa.Column('is_private', sa.Boolean(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),

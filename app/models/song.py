@@ -15,7 +15,7 @@ class Song(db.Model):
     duration = db.Column(db.Integer, nullable=False)
     cover_art = db.Column(db.String, nullable=False)
     plays = db.Column(db.Integer)
-    genres = db.Column(db.String, nullable=False)
+    genre = db.Column(db.String, nullable=False)
     is_private = db.Column(db.Boolean, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate = datetime.now)
