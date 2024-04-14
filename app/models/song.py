@@ -34,6 +34,6 @@ class Song(db.Model):
             'duration': self.duration,
             'cover_art': self.cover_art,
             'plays': self.plays,
-            'genres': self.genres,
+            'genres': self.genre,
             'is_private': self.is_private,
         }
