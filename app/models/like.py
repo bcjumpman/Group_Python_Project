@@ -22,4 +22,5 @@ class Like(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             'song_id': self.song_id,
+            'created_at': self.created_at,
         }
