@@ -21,7 +21,7 @@ def seed_songs():
     user_ids = [1, 4, 5]
 
     # genres
-    genre = ["pop", "rock", "jazz", "hip hop", "country", "classical", "electronic", "blues", "folk", "reggae"]
+    genres = ["pop", "rock", "jazz", "hip hop", "country", "classical", "electronic", "blues", "folk", "reggae"]
 
     # song URLs
     song_urls = [
@@ -51,7 +51,7 @@ def seed_songs():
         duration = random.randint(180, 360)
         cover_art = random.choice(cover_art_urls)
         plays = random.randint(0, 1000)
-        genre = random.choice(genre)
+        genre = genres[random.randint(0, len(genres) -1)]
         is_private = random.choice([True, False])
         song_url = random.choice(song_urls)
 
