@@ -1,6 +1,6 @@
 from flask.cli import AppGroup
-from .songs import seed_songs, undo_songs
 from .users import seed_users, undo_users
+from .songs import seed_songs, undo_songs
 from .likes import seed_likes, undo_likes
 from .comments import seed_comments, undo_comments
 
