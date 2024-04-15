@@ -9,17 +9,17 @@ comment_routes = Blueprint('comments', __name__)
 #   comments = Comment.query.all()
 #   return {'comments': [comment.to_dict() for comment in comments]}
 
-# @comment_routes('<int:id>')
+# @comment_routes.route('<int:id>')
 # def getCommentById(id):
 #   comment = Comment.query.all()
 #   return comment.to_dict()
 
-# @comment_routes('<int:id>', methods=["POST"])
+# @comment_routes.route('<int:id>', methods=["POST"])
 # def getCommentById(id):
 #   comment = Comment.query.all()
 #   return comment.to_dict()
 
-# @comment_routes('<int:id>/delete')
+# @comment_routes.route('<int:id>/delete')
 # def deleteCommentById(id):
 #   comment = Comment.query.all()
 #   return comment.to_dict()
