@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import User
+from app.models import User, db
 
 user_routes = Blueprint('users', __name__)
 
@@ -41,30 +41,67 @@ def user(id):
 
 
 # create
-# @user_routes.route('/', methods=['POST'])
-# def create_user():
-#     # Get form data
-#     data = request.get_json()
+@user_routes.route('/', methods=['POST'])
+def create_user():
+    # Get form data
+    data = request.get_json()
 
-#     user = dict()
+    # user = dict()
 
-#     # update song with form data
-#     user['first_name'] = data['first_name']
-#     user['last_name'] = data['last_name']
-#     user['artist_name'] = data['artist_name']
-#     user['artist_country'] = data['artist_country']
-#     user['artist_bio'] = data['artist_bio']
+    # update song with form data
+    user = User(
+        first_name = data.get('first_name'),
+        last_name = data.get('last_name'),
+        artist_name = data.get('artist_name'),
+        artist_country = data.get('artist_country'),
+        artist_bio = data.get('artist_bio')
+    )
 
-#     return jsonify({"user": user})
+    db.session.add()
+    db.session.commit()
+
+    # return jsonify({"user": user})
+    return jsonify(user.to_dict()), 201
 
 
 # update
 @user_routes.route('/<int:id>', methods=['PUT'])
 def update_user(id):
-    return
+        # Get form data
+    data = request.get_json()
+
+    # Query for the user
+    user = User.query.get(id)
+
+    # Check if the user exists
+    if not user:
+        return {"errors": "User not found"}, 404
+
+    # Update user attributes
+    user.first_name = data.get('first_name', user.first_name)
+    user.last_name = data.get('last_name', user.last_name)
+    user.artist_name = data.get('artist_name', user.artist_name)
+    user.artist_country = data.get('artist_country', user.artist_country)
+    user.artist_bio = data.get('artist_bio', user.artist_bio)
+
+    # Commit changes to the database
+    db.session.commit()
+
+    return jsonify(user.to_dict())
 
 
 # delete
 @user_routes.route('/<int:id>', methods=['DELETE'])
 def remove_user(id):
-    return
+        # Query for the user
+    user = User.query.get(id)
+
+    # Check if the user exists
+    if not user:
+        return {"errors": "User not found"}, 404
+
+    # Delete the user
+    db.session.delete(user)
+    db.session.commit()
+
+    return jsonify({"message": "User deleted successfully"})
