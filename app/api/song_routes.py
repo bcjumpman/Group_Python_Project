@@ -24,25 +24,6 @@ def getAllSongs():
     per_song['likes'] = len(song.likes)
     all_songs.append(per_song)
 
-  # if request.args:
-  #   filter_list = []
-  #   filtered = []
-
-  #   for arg in request.args:
-  #     filter_list.append((arg, request.args[arg]))
-
-  #   def dynamic_filter(variable):
-  #     if request.args[arg] in all_songs[arg]:
-  #       return True
-  #     else:
-  #       return False
-
-  #   filtered = filter(dynamic_filter, all_songs)
-  #   print(filtered)
-
-  #   return {'message': "this is filtered"}
-
-
   return jsonify({'songs': all_songs})
 
 # Create new song
