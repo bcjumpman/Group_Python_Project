@@ -33,14 +33,15 @@ function Navigation({ isLoaded }) {
 
 
   return (
-    <ul>
-      <li>
-        <NavLink to="/">Music Haze</NavLink>
-      </li>
+    <ul id="navbar-full">
+      <div className="navbar-left">
+        <NavLink></NavLink>
+        <NavLink to="/" className="site-title">Music Haze</NavLink>
+      </div>
 
-      <li>
+      <div className="navbar-right">
         <ProfileButton />
-      </li>
+      </div>
       {isLoaded && sessionLinks}
     </ul>
   );

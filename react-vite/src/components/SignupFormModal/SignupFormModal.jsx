@@ -31,15 +31,15 @@ function SignupFormModal() {
 
     const serverResponse = await dispatch(
       thunkSignup({
-        firstName,
-        lastName,
+        first_name: firstName,
+        last_name: lastName,
         email,
         username,
         password,
-        isArtist,
-        artistName,
-        artistCountry,
-        artistBio
+        is_artist: isArtist,
+        artist_name: artistName,
+        artist_country: artistCountry,
+        artist_bio: artistBio
       })
     );
 
@@ -50,22 +50,23 @@ function SignupFormModal() {
     }
   };
 
-  const invalidInfo = () => {
-    return (
-      !email ||
-      !username ||
-      !firstName ||
-      !lastName ||
-      !password ||
-      !confirmPassword ||
-      !isArtist ||
-      !artistName ||
-      !artistCountry
-    );
-  };
+  // const invalidInfo = () => {
+  //   return (
+  //     !email ||
+  //     !username ||
+  //     !firstName ||
+  //     !lastName ||
+  //     !password ||
+  //     !confirmPassword ||
+  //     password === confirmPassword ||
+  //     !isArtist ||
+  //     !artistName ||
+  //     !artistCountry
+  //   );
+  // };
 
   const disabledButton = () => {
-    return (firstName === "" || lastName === "" || email === "" || username === "" || confirmPassword === "" || isArtist === "" || artistName === "" || artistCountry === "")
+    return (firstName === "" || lastName === "" || email === "" || username === "" || confirmPassword === "" || password !== confirmPassword || isArtist === "")
   }
 
   return (
@@ -77,6 +78,7 @@ function SignupFormModal() {
           First Name
           <input
             type="text"
+            className="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
@@ -86,6 +88,7 @@ function SignupFormModal() {
           Last Name
           <input
             type="text"
+            className="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
@@ -95,6 +98,7 @@ function SignupFormModal() {
           Email
           <input
             type="email"
+            className="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -105,6 +109,7 @@ function SignupFormModal() {
           Username
           <input
             type="text"
+            className="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
@@ -115,6 +120,7 @@ function SignupFormModal() {
           Password
           <input
             type="password"
+            className="text"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -125,6 +131,7 @@ function SignupFormModal() {
           Confirm Password
           <input
             type="password"
+            className="text"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
@@ -149,39 +156,45 @@ function SignupFormModal() {
           /> No
         </label>
         {errors.isArtist && <p className="errorMessage">{errors.isArtist}</p>}
-        <label>
-          Artist Name
-          <input
-            type="text"
-            value={artistName}
-            onChange={(e) => setArtistName(e.target.value)}
-            required
-          />
-        </label>
-        {errors.artistName && <p className="errorMessage">{errors.artistName}</p>}
-        <label>
-          Country
-          <input
-            type="text"
-            value={artistCountry}
-            onChange={(e) => setArtistCountry(e.target.value)}
-            required
-          />
-        </label>
-        {errors.artistCountry && <p className="errorMessage">{errors.artistCountry}</p>}
-        <label>
-          Biography
-          <input
-            type="textarea"
-            value={artistBio}
-            onChange={(e) => setArtistBio(e.target.value)}
-            required
-          />
-        </label>
-        {errors.artistBio && <p className="errorMessage">{errors.artistBio}</p>}
+        {isArtist && (
+          <>
+            <label>
+              Artist Name
+              <input
+                type="text"
+                className="text"
+                value={artistName}
+                onChange={(e) => setArtistName(e.target.value)}
+                required
+              />
+            </label>
+            {errors.artistName && <p className="errorMessage">{errors.artistName}</p>}
+            <label>
+              Country
+              <input
+                type="text"
+                className="text"
+                value={artistCountry}
+                onChange={(e) => setArtistCountry(e.target.value)}
+                required
+              />
+            </label>
+            {errors.artistCountry && <p className="errorMessage">{errors.artistCountry}</p>}
+            <label>
+              Biography
+              <textarea
+                // type="textarea"
+                className="textarea"
+                value={artistBio}
+                onChange={(e) => setArtistBio(e.target.value)}
+              />
+            </label>
+            {errors.artistBio && <p className="errorMessage">{errors.artistBio}</p>}
+          </>
+        )}
         {disabledButton() ?
           <button className="disabledSignupButton" disabled={true} type="submit">Sign Up</button>
-          : <button className="signupModalButton" disabled={invalidInfo()} type="submit">Sign Up</button>}
+          : <button className="signupModalButton" disabled={false} type="submit">Sign Up</button>}
       </form>
     </div>
   );
