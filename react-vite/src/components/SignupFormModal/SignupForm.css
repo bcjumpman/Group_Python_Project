@@ -18,6 +18,10 @@
     align-items: center;
 }
 
+.signupForm label {
+    margin-top: 10px;
+}
+
 .signupForm input {
     width: 25rem;
     margin: 5px 20px;
@@ -59,4 +63,8 @@
 
 .signupModalButton:hover {
     cursor: pointer;
+}
+
+.errorMessage {
+    color: red;
 }
