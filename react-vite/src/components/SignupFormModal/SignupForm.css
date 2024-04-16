@@ -16,19 +16,32 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 1em;
 }
 
-.signupForm input {
+.signupForm label {
+    margin-top: 5px;
+}
+
+.text {
     width: 25rem;
     margin: 5px 20px;
-    background-color: #dee7e4;
+    background-color: #D4D4D4;
 }
 
-.signupForm input:focus {
+.textarea {
+    width: 25rem;
+    margin: 5px 20px;
+    background-color: #D4D4D4;
+    text-align: center;
+    resize: vertical;
+}
+
+/* .signupForm input:focus, textarea:focus {
     border-color: #5c8374;
     box-shadow: 0 0 10px #5c8374;
     outline: none;
-}
+} */
 
 .signupForm p {
     padding: 5px;
@@ -38,25 +51,31 @@
 .disabledSignupButton {
     font-size: 18px;
     margin-top: 10px;
+    margin-bottom: 20px;
     width: 25rem;
     height: 50px;
     color: white;
     border: 1px black solid;
     box-shadow: 5px 5px 5px grey;
-    background-color: #afdfdf;
+    background-color: #7E22CE;
 }
 
 .signupModalButton {
     font-size: 18px;
     margin-top: 10px;
+    margin-bottom: 20px;
     height: 50px;
     color: white;
     border: 3px black solid;
     box-shadow: 5px 5px 5px grey;
-    background-color: #c6286d;
+    background-color: #E8EE1D;
     width: 25rem;
 }
 
 .signupModalButton:hover {
     cursor: pointer;
+}
+
+.errorMessage {
+    color: red;
 }
