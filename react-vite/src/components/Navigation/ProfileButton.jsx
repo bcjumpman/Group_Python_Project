@@ -5,12 +5,14 @@ import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { useNavigate } from "react-router-dom";
 
 function ProfileButton() {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
+  const navigate = useNavigate()
 
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
@@ -37,25 +39,30 @@ function ProfileButton() {
     e.preventDefault();
     dispatch(thunkLogout());
     closeMenu();
+    navigate('/')
   };
+
+  const ulClassName = "profile-dropdown" + (showMenu ? "" : "hidden")
 
   return (
     <>
-      <button onClick={toggleMenu}>
+      <button id="prof-but" onClick={toggleMenu}>
         <FaUserCircle />
       </button>
       {showMenu && (
-        <ul className={"profile-dropdown"} ref={ulRef}>
+        <ul className={ulClassName} ref={ulRef}>
           {user ? (
-            <>
-              <li>{user.username}</li>
-              <li>{user.email}</li>
-              <li>
-                <button onClick={logout}>Log Out</button>
+            <div id="profile-popup">
+              <li className='menu-content'>
+                <li>{user.username}</li>
+                <li>{user.email}</li>
+                <li>
+                  <button id="logout" onClick={logout}>Log Out</button>
+                </li>
               </li>
-            </>
+            </div>
           ) : (
-            <>
+            <div id='popup'>
               <OpenModalMenuItem
                 itemText="Log In"
                 onItemClick={closeMenu}
@@ -66,7 +73,7 @@ function ProfileButton() {
                 onItemClick={closeMenu}
                 modalComponent={<SignupFormModal />}
               />
-            </>
+            </div>
           )}
         </ul>
       )}
