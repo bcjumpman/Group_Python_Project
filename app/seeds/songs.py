@@ -66,7 +66,6 @@ def seed_songs():
             genre=genre,
             is_private=is_private
         )
-        # print(new_song)
 
         db.session.add(new_song)
 
