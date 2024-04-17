@@ -25,24 +25,26 @@ def seed_songs():
 
     # song URLs
     song_urls = [
-        "https://open.spotify.com/track/0Z7nGFVCLfixWctgePsRk9?si=cba08d89886443bc",
-        "https://open.spotify.com/track/3KkXRkHbMCARz0aVfEt68P?si=d05b3b3e512c4700",
-        "https://open.spotify.com/track/7qiZfU4dY1lWllzX7mPBI3?si=3e7e51e55df84d85",
-        "https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b?si=62e2716fb09d4e7a"
+        "https://musichazeapp.s3.us-west-1.amazonaws.com/music_haze_tracks/African+Fella+-+Cumbia+Deli.mp3",
+        "https://musichazeapp.s3.us-west-1.amazonaws.com/music_haze_tracks/Brisket+Taco+-+Cumbia+Deli.mp3",
+        "https://musichazeapp.s3.us-west-1.amazonaws.com/music_haze_tracks/Don't+Fret+-+Quincas+Moreira.mp3",
+        "https://musichazeapp.s3.us-west-1.amazonaws.com/music_haze_tracks/Putting+On+The+Ritz+-+Freedom+Trail+Studio.mp3"
+        "https://musichazeapp.s3.us-west-1.amazonaws.com/music_haze_tracks/Summer+Somewhere+In+Cuba+-+Cumbia+Deli.mp3"
+        "https://musichazeapp.s3.us-west-1.amazonaws.com/music_haze_tracks/Woodshedder+-+Quincas+Moreira.mp3"
     ]
 
     # cover art URLs
     cover_art_urls = [
-        "https://res.cloudinary.com/dkjaxm35z/image/upload/v1712982620/Music_Haze/iohre3ewyy2znr2hecws.webp",
-        "https://res.cloudinary.com/dkjaxm35z/image/upload/v1712982620/Music_Haze/ldbomx7xevntn4zywvm9.webp",
-        "https://res.cloudinary.com/dkjaxm35z/image/upload/v1712982620/Music_Haze/hqcxha3i0n9ulx1qjzdc.webp",
-        "https://res.cloudinary.com/dkjaxm35z/image/upload/v1712982620/Music_Haze/q6eqlw5rj8rj1f3jnxxa.webp",
-        "https://res.cloudinary.com/dkjaxm35z/image/upload/v1712982619/Music_Haze/seo7stymloejhccno9bf.webp",
-        "https://res.cloudinary.com/dkjaxm35z/image/upload/v1712982619/Music_Haze/h3eu1pcwtljyqbtlyvzw.webp",
-        "https://res.cloudinary.com/dkjaxm35z/image/upload/v1712982619/Music_Haze/k3tplcyolwcjccsvwcdk.webp",
-        "https://res.cloudinary.com/dkjaxm35z/image/upload/v1712982619/Music_Haze/f4jjxqixbkp1ftu28z7a.webp",
-        "https://res.cloudinary.com/dkjaxm35z/image/upload/v1712982619/Music_Haze/l3weymaphestpwktxiqt.webp",
-        "https://res.cloudinary.com/dkjaxm35z/image/upload/v1712982619/Music_Haze/uvn5qsvoakvl6s42taqz.webp"
+        "https://musichazeapp.s3.us-west-1.amazonaws.com/music_haze/14.-Blink-182-%E2%80%98Enema-of-the-State-1999-album-art-billboard-1240.webp",
+        "https://musichazeapp.s3.us-west-1.amazonaws.com/music_haze/22.-Drake-If-Youre-Reading-This-Its-Too-Late-2015-album-art-billboard-1240.webp",
+        "https://musichazeapp.s3.us-west-1.amazonaws.com/music_haze/33.-Kanye-West-%E2%80%98My-Beautiful-Dark-Twisted-Fantasy-2010-album-art-billboard-1240.webp",
+        "https://musichazeapp.s3.us-west-1.amazonaws.com/music_haze/47.-Janet-Jackson-%E2%80%98Rhythm-Nation-1814-1989-album-at-billboard-1240.webp",
+        "https://musichazeapp.s3.us-west-1.amazonaws.com/music_haze/48.-Lady-Gaga-%E2%80%98The-Fame-Monster-2009-album-art-billboard-1240.webp",
+        "https://musichazeapp.s3.us-west-1.amazonaws.com/music_haze/Bad-Bunny-Un-Verano-Sin-Ti-album-art-billboard-1240.webp",
+        "https://musichazeapp.s3.us-west-1.amazonaws.com/music_haze/billie-holiday-lady-in-satin-cover-1958-billboard-1240.webp",
+        "https://musichazeapp.s3.us-west-1.amazonaws.com/music_haze/outkast-stankonia-cover-2000-billboard-1240.webp",
+        "https://musichazeapp.s3.us-west-1.amazonaws.com/music_haze/rihanna-anti-cover-2016-billboard-1240.webp",
+        "https://musichazeapp.s3.us-west-1.amazonaws.com/music_haze/roxy-music-for-your-pleasure-cover-1973-billboard-1240.webp"
     ]
 
     for song in songs:
