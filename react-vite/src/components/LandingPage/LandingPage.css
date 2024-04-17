@@ -1,0 +1,31 @@
+.landing-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}
+
+#landing-page-logo {
+  width: 50%;
+}
+
+.LP-button-container {
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+  gap: 5px
+}
+
+.LP-button-container > button {
+  border: 3px solid #7d49c2;
+  background-color: #f1ed2a;
+  padding: 5px;
+  box-shadow: 3px 3px 5px black;
+  font-weight: bold;
+  color: #7d49c2
+}
+
+.LP-button-container > button:hover {
+  cursor: pointer;
+}

@@ -1,49 +1,59 @@
-// import { useDispatch, useSelector } from 'react-redux';
-// import { useEffect } from 'react';
-// import { accessSpots } from '../../store/spot';
-// import { useNavigate } from 'react-router-dom';
-// import './LandingPage.css'
+import { useState } from "react";
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { thunkLogin } from "../../redux/session";
+import musichaze_logo from "/musichaze_logo_edit.jpg"
+import OpenModalButton from "../OpenModalButton";
+import LoginFormModal from "../LoginFormModal";
+import SignupFormModal from "../SignupFormModal";
+import './LandingPage.css'
 
-// const Landing = () => {
-//     const spots = useSelector(state => state.spotStore)
-//     const dispatch = useDispatch()
-//     const navigate = useNavigate()
+function LandingPage() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [modalIsActive, setModalIsActive] = useState(false)
 
-//     useEffect(() => {
-//         dispatch(accessSpots())
-//     }, [dispatch])
+  const loginDemoUser = async (e) => {
+    e.preventDefault();
 
-//     // if (!spots) return null;
+    await dispatch(
+      thunkLogin({
+        email: "demo@aa.io",
+        password: "password",
+      })
+    );
+    navigate('/discover')
+  }
 
-//     return (
-//         <div className='all-spots-contain'>
-//             {Object.values(spots).map((spot) => (
-//                 <div
-//                     key={spot.id}
-//                     className='one-spot-contain'
-//                     title={spot.name}
-//                 >
-//                     <img
-//                         className='image'
-//                         onClick={() => navigate(`spots/${spot.id}`)}
-//                         src={spot.previewImage}
-//                     />
-//                     <p className='name'
-//                         onClick={() => navigate(`spots/${spot.id}`)}
-//                     >{spot.name}</p>
-//                     <div className='info'>
-//                         <p className='location'>{spot.city}, {spot.state}</p>
-//                         <p className='price'>{`$${spot.price} / night`}</p>
-//                         <br />
-//                         <p className='avg-rate'>
-//                             <i className='fa-solid fa-ring'></i>&nbsp;
-//                             {spot.avgRating > 0 ? spot.avgRating.toFixed(1) : 'New'}
-//                         </p>
-//                     </div>
-//                 </div>
-//             ))}
-//         </div>
-//     )
-// }
+const toggleLPButtons = () => {
+  if (modalIsActive === true){
+    setModalIsActive(false)
+  } else {
+    setModalIsActive(false)
+  }
+  console.log(modalIsActive)
+}
 
-// export default Landing;
+  return (
+      <div className='landing-page-container'>
+        <img id="landing-page-logo" src={musichaze_logo} alt="music-haze-logo" />
+        <div className={modalIsActive ? 'LP-button-container hidden' : 'LP-button-container'}>
+          <OpenModalButton
+              buttonText="Log In"
+              onButtonClick={toggleLPButtons}
+              onModalClose={toggleLPButtons}
+              modalComponent={<LoginFormModal />}
+            />
+          <OpenModalButton
+                buttonText="Sign Up"
+                onButtonClick={toggleLPButtons}
+                onModalClose={toggleLPButtons}
+                modalComponent={<SignupFormModal />}
+            />
+          <button className='entry' onClick={loginDemoUser}>Demo User</button>
+        </div>
+      </div>
+  )
+}
+
+export default LandingPage;
