@@ -35,17 +35,17 @@ function LoginFormModal() {
     return false;
   }
 
-  const demoUser = async (e) => {
-    e.preventDefault();
+  // const demoUser = async (e) => {
+  //   e.preventDefault();
 
-    await dispatch(
-      thunkLogin({
-        email: "demo@aa.io",
-        password: "password",
-      })
-    );
-    closeModal();
-  }
+  //   await dispatch(
+  //     thunkLogin({
+  //       email: "demo@aa.io",
+  //       password: "password",
+  //     })
+  //   );
+  //   closeModal();
+  // }
 
   return (
     <div className="login-modal">
