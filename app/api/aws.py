@@ -2,6 +2,9 @@ import boto3
 import botocore
 import os
 import uuid
+from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+from wtforms import SubmitField
 
 s3 = boto3.client(
    "s3",
@@ -10,7 +13,7 @@ s3 = boto3.client(
 )
 
 
-ALLOWED_EXTENSIONS = {"pdf", "png", "jpg", "jpeg", "gif", "mp3"}
+ALLOWED_EXTENSIONS = {"pdf", "png", "jpg", "jpeg", "gif", "mp3", "webp"}
 
 def get_unique_filename(filename):
     ext = filename.rsplit(".", 1)[1].lower()
@@ -44,7 +47,7 @@ def upload_file_to_s3(file, acl="public-read"):
 
 
 def remove_file_from_s3(file_url):
-    # AWS needs the image file name, not the URL,
+    # AWS needs the image file name, not the URL
     key = file_url.rsplit("/", 1)[1]
     try:
         s3.delete_object(

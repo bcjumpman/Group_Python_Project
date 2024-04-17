@@ -1,16 +1,43 @@
 from flask import Blueprint, jsonify, request
-from app.models import db, Song, Like, Comment
+from app.models import db, Song, Like, Comment, User
+from flask_login import login_required, current_user
 import wave
+from ..forms.song_form import SongForm
+from . import aws as s3
 
 song_routes = Blueprint('songs', __name__)
 
-## Read the music file to retrieve duration
-# def get_duration_wave(file_path):
-#    with wave.open(file_path, 'r') as audio_file:
-#       frame_rate = audio_file.getframerate()
-#       n_frames = audio_file.getnframes()
-#       duration = n_frames / float(frame_rate)
-#       return duration
+# Helper function to validate and upload song
+def post_song(songForm):
+    song = songForm.data["song_url"]
+
+    song.filename = s3.get_unique_filename(song.filename)
+    upload_song = s3.upload_file_to_s3(song)
+
+    upload_pic = {"url": "No Image"}
+
+    cover_art = songForm.data['cover_art']
+    if cover_art:
+        cover_art.filename = s3.get_unique_filename(cover_art.filename)
+        upload_pic = s3.upload_file_to_s3(cover_art)
+
+    user = User.query.get(current_user.id)
+    new_song = Song(
+        # user = user,
+        name = songForm.data["name"],
+        genre = songForm.data["genre"],
+        is_private = songForm.data["is_private"],
+        duration = songForm.data["duration"],
+        plays = 0,
+        user_id = current_user.id,
+        song_url = upload_song['url'],
+        cover_art = upload_pic['url']
+    )
+
+    db.session.add(new_song)
+    db.session.commit()
+    return new_song
+
 
 # Get all songs with like
 @song_routes.route('/')
@@ -45,27 +72,19 @@ def getAllSongs():
 
   return jsonify({'songs': all_songs})
 
-# Create new song
+#Upload a song
 @song_routes.route('/', methods=["POST"])
-def createNewSong():
-  data = request.get_json()
+@login_required
+def post_song_route():
+    form = SongForm()
 
-  new_song = Song(
-    name = data['name'],
-    user_id = data['user_id'],
-    song_url = data['song_url'],
-    cover_art = data['cover_art'],
-    genre = data['genre'],
-    is_private = data['is_private'],
-    # duration = get_duration_wave(data['song_url'])
-    duration = 888,
-    plays = 0
-  )
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+      new_song = post_song(form)
+      return new_song.to_dict()
 
-  db.session.add(new_song)
-  db.session.commit()
+    return {"errors": form.errors}, 401
 
-  return jsonify({"song": new_song.to_dict()})
 
 # Get song by id
 @song_routes.route('<int:id>', methods=["GET"])
@@ -80,6 +99,7 @@ def getSongById(id):
 
   return jsonify({"song": query_song})
 
+# Edit song by id
 @song_routes.route('<int:id>', methods=["PUT"])
 def updateSongById(id):
   data = request.get_json()
