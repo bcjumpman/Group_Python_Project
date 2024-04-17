@@ -1,4 +1,5 @@
 const GET_SONGS = "songs/GET_SONGS";
+const GET_USER_LIKED_SONGS = "songs/GET_USER_LIKED_SONGS";
 const GET_SONG = "songs/GET_SONG";
 const CREATE_SONG = "songs/CREATE_SONG";
 const EDIT_SONG = "songs/EDIT_SONG";
@@ -6,13 +7,11 @@ const DELETE_SONG = "songs/DELETE_SONG";
 const ADD_LIKE = "songs/ADD_LIKE";
 const DELETE_LIKE = "songs/DELETE_LIKE";
 const PLAY_SONG = "songs/PLAY_SONG";
+const GET_USER_SONGS = "songs/GET_USER_SONGS";
 const RESET_SINGLE_SONG = "songs/RESET_SINGLE_SONG";
 const IS_PLAYING = "songs/IS_PLAYING";
 const SET_PLAYER_REF = "songs/SET_PLAYER_REF";
 const SET_CURRENT_TIME = "songs/SET_CURRENT_TIME";
-
-const GET_USER_SONGS = "songs/GET_USER_SONGS";
-const GET_USER_LIKED_SONGS = "songs/GET_USER_LIKED_SONGS";
 
 const loadSongs = (songs) => ({
   type: GET_SONGS,
@@ -194,6 +193,90 @@ export default function songReducer(state = initialState, action) {
       newState.allSongs = { ...state.allSongs };
       delete newState.allSongs[action.songId];
       return newState;
+
+    case ADD_LIKE: {
+      const { songId, curr_user, song } = action.payload;
+      if (Object.values(newState.allSongs).length) {
+        newState.allSongs = { ...state.allSongs };
+        newState.allSongs[songId] = { ...state.allSongs[songId] };
+        newState.allSongs[songId].song_likes = {
+          ...state.allSongs[songId].song_likes,
+        };
+        newState.allSongs[songId].song_likes[curr_user.id] = curr_user;
+        newState.allSongs[songId].like_count++;
+      }
+      if (Object.values(newState.singleSong).length) {
+        newState.singleSong = { ...state.singleSong };
+        if (newState.singleSong.id == songId) {
+          newState.singleSong.like_count++;
+          newState.singleSong.song_likes = { ...state.singleSong.song_likes };
+          newState.singleSong.song_likes[curr_user.id] = curr_user;
+        }
+      }
+      if (Object.values(newState.userSongs).length) {
+        newState.userSongs = { ...state.userSongs };
+        if (newState.userSongs[songId]) {
+          newState.userSongs[songId] = { ...state.userSongs[songId] };
+          newState.userSongs[songId].like_count++;
+          newState.userSongs[songId].song_likes[curr_user.id] = curr_user;
+        }
+      }
+      if (Object.values(newState.userLikedSongs).length) {
+        newState.userLikedSongs = { ...state.userLikedSongs };
+        if (newState.userLikedSongs[songId]) {
+          newState.userLikedSongs[songId] = { ...state.userLikedSongs[songId] };
+          newState.userLikedSongs[songId].like_count++;
+          newState.userLikedSongs[songId].song_likes[curr_user.id] = curr_user;
+        } else {
+          newState.userLikedSongs[songId] = song;
+        }
+      }
+      return newState;
+    }
+    case DELETE_LIKE: {
+      const { songId, curr_user, userId } = action.payload;
+      if (Object.values(newState.allSongs).length) {
+        newState.allSongs = { ...state.allSongs };
+        if (newState.allSongs[songId]) {
+          newState.allSongs[songId] = { ...state.allSongs[songId] };
+          newState.allSongs[songId].song_likes = {
+            ...state.allSongs[songId].song_likes,
+          };
+          delete newState.allSongs[songId].song_likes[curr_user.id];
+          newState.allSongs[songId].like_count--;
+        }
+      }
+      if (Object.values(newState.singleSong).length) {
+        newState.singleSong = { ...state.singleSong };
+        if (newState.singleSong == songId) {
+          newState.singleSong.like_count--;
+          newState.singleSong.song_likes = {
+            ...state.singleSong.song_likes,
+          };
+          delete newState.singleSong.song_likes[curr_user.id];
+        }
+      }
+      if (Object.values(newState.userSongs).length) {
+        newState.userSongs = { ...state.userSongs };
+        if (newState.userSongs[songId]) {
+          newState.userSongs[songId] = { ...state.userSongs[songId] };
+          newState.userSongs[songId].like_count--;
+          delete newState.userSongs[songId].song_likes[curr_user.id];
+        }
+      }
+      if (Object.values(newState.userLikedSongs).length) {
+        newState.userLikedSongs = { ...state.userLikedSongs };
+        if (newState.userLikedSongs[songId]) {
+          newState.userLikedSongs[songId] = { ...state.userLikedSongs[songId] };
+          if (curr_user.id == userId) delete newState.userLikedSongs[songId];
+          else {
+            newState.userLikedSongs[songId].like_count--;
+            delete newState.userLikedSongs[songId].song_likes[curr_user.id];
+          }
+        }
+      }
+      return newState;
+    }
 
     case PLAY_SONG: //Playing song
       return { ...state, playSong: action.song };
