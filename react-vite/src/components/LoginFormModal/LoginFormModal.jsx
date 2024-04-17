@@ -81,7 +81,6 @@ function LoginFormModal() {
           <button className='login-success' type="submit" >Log In</button>
         }
       </form>
-      <a href="/" onClick={demoUser} className="demo-user-link">Demo User</a>
     </div>
   );
 }
