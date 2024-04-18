@@ -11,4 +11,4 @@ class SongForm(FlaskForm):
     duration = IntegerField("Integer", validators=[DataRequired()])
     cover_art = FileField("Cover Art URL", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
     genre = SelectField("Genre", validators=[DataRequired()], choices=[(genre, genre.capitalize()) for genre in ["pop", "rock", "jazz", "hip hop", "country", "classical", "electronic", "blues", "folk", "reggae"]])
-    is_private = BooleanField("Private?", validators=[DataRequired()])
+    is_private = BooleanField("Private?")

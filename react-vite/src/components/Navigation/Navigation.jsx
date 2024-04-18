@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import OpenModalButton from "../OpenModalButton";
@@ -39,9 +39,9 @@ function Navigation({ isLoaded }) {
       <ul id="navbar-full">
         <div className="navbar-left">
           <NavLink></NavLink>
-          <NavLink to="/discover" className="site-title">
+          <Link to="/discover">
             <img id="nav-logo" src={logo} alt="" />
-          </NavLink>
+          </Link>
         </div>
 
         <div className="navbar-right">

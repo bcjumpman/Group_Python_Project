@@ -51,7 +51,6 @@ def sign_up():
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        print(form.data)
         user = User(
             username = form.data['username'],
             email = form.data['email'],
@@ -63,20 +62,6 @@ def sign_up():
             artist_country = form.data['artist_country'],
             artist_bio = form.data['artist_bio']
             )
-
-#         {
-#     "password": "password",
-#     "artist_bio": "",
-#     "artist_country": "",
-#     "artist_name": "",
-#     "created_at": "Sun, 14 Apr 2024 15:24:27 GMT",
-#     "email": "example1@aa.io",
-#     "first_name": "kiante",
-#     "is_artist": false,
-#     "last_name": "da Don",
-#     "updated_at": "Sun, 14 Apr 2024 15:24:27 GMT",
-#     "username": "example1"
-# }
 
         db.session.add(user)
         db.session.commit()
