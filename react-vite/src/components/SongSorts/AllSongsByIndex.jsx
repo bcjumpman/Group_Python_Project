@@ -1,9 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faHeart, faComment } from '@fortawesome/free-solid-svg-icons'
-import { useDispatch, useSelector } from "react-redux";
-import { getSongsThunk } from "../../redux/song";
-import { useEffect } from "react";
-import "./Songs.css"
+import { useSelector } from "react-redux";
+import "./SongSorts.css"
 
 
 export default function AllSongsByIndex(){
@@ -15,7 +13,7 @@ export default function AllSongsByIndex(){
       <div className="song-card-container">
         {allSongs ? allSongs.map((song) => {
           return(
-            <div className='song-card'>
+            <div className='song-card' key={song.id}>
               <div>
               <img className="song-card-cover-art" src={song.cover_art} alt="cover art for song" />
               </div>

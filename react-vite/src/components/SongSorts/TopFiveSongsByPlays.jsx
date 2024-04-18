@@ -4,18 +4,17 @@ import { useSelector } from "react-redux";
 import "./SongSorts.css"
 
 
-export default function AllSongsByUser(){
+export default function TopFiveSongsByPlays(){
   let allSongs = useSelector((state) => state.song.allSongs.songs);
-  const sessionUser = useSelector(state => state.session.user)
 
   if(allSongs === undefined){
     return
   } else {
-
-    const userSongs = allSongs.filter((song) => song.user_id === sessionUser.id)
+    const allSongsByPlays = allSongs.sort((b, a) => a.plays - b.plays)
+    const topFiveSongsByPlays = allSongsByPlays.slice(0,5)
     return (
       <div className="song-card-container">
-        {userSongs ? userSongs.map((song) => {
+        {topFiveSongsByPlays ? topFiveSongsByPlays.map((song) => {
           return(
             <div className='song-card' key={song.id}>
               <div>
@@ -34,7 +33,7 @@ export default function AllSongsByUser(){
               </div>
             </div>
           )
-        }) : console.log(!userSongs)}
+        }) : console.log(!topFiveSongsByPlays)}
       </div>
     )
   }

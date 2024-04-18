@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { thunkLogin } from "../../redux/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
@@ -6,6 +7,7 @@ import "./LoginForm.css";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -21,11 +23,14 @@ function LoginFormModal() {
       })
     );
 
+
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
       closeModal();
+      navigate('/discover')
     }
+
   };
 
   const disabledButton = () => {
@@ -33,18 +38,6 @@ function LoginFormModal() {
       return true;
     }
     return false;
-  }
-
-  const demoUser = async (e) => {
-    e.preventDefault();
-
-    await dispatch(
-      thunkLogin({
-        email: "demo@aa.io",
-        password: "password",
-      })
-    );
-    closeModal();
   }
 
   return (

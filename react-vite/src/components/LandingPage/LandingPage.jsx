@@ -22,8 +22,11 @@ function LandingPage() {
         password: "password",
       })
     );
-    navigate('/discover')
+
+    await navigate('/discover')
   }
+
+
 
 const toggleLPButtons = () => {
   if (modalIsActive === true){
