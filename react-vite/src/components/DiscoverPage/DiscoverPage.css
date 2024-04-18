@@ -1,3 +1,26 @@
-.test-container {
+.discover.page-container {
   display: flex;
+}
+
+.discover-page-left {
+  max-width: 75%;
+  min-width: 650px;
+}
+
+.discover-page-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 200px;
+  max-width: 25%;
+}
+
+.top-five-section {
+  display: flex;
+  width: 100%;
+  gap: 5px;
+}
+
+.discover-top-five {
+  width: 100%
 }

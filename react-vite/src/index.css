@@ -1,12 +1,36 @@
 /* TODO: Add sitewide styles */
 * {
-  margin: 0
+  margin: 0;
 }
 
 body {
   background-color: #d4d4d4;
+  overflow-x: hidden;
+  width: 100%;
+
 }
 
 .hidden {
   display: none
+}
+
+.page-container {
+margin: 0px auto;
+padding: 20px;
+max-width: 1080px;
+margin: 0 auto;
+}
+
+.h-breaker {
+  display: block;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ac90cc;
+}
+
+.v-breaker {
+  display: block;
+  padding-left: 20px;
+  margin-left: 20px;
+  border-left: 1px solid #ac90cc;
 }
