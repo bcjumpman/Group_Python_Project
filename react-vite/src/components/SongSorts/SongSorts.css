@@ -3,23 +3,23 @@
   flex-direction: column;
   gap: 5px;
   margin: 5px 0;
-  padding: 10px;
-  width: 100%;
+
 }
 
 .song-card-cover-art {
-  width: 100px;
-  height: 100px;
+  max-width: 100px;
+  max-height: 60px;
 }
 
 .song-card {
-  width: 100%;
   background-color: #cdc0a4;
   display: flex;
   gap: 10px;
   padding: 5px;
-  border: 1px solid #f1ed2a;
+  border: 1px solid #9382cc;
   border-radius: 5px;
+  min-width: 300px
+  /* width: 100%; */
 }
 
 .song-card-artist {
@@ -39,4 +39,13 @@
 
 .song-card-icon-stats span {
   padding: 10px;
+}
+
+.song-card-icon-stats svg {
+  font-size: .7em;
+  color: #ac90cc
+}
+
+.song-card-icon-stats span {
+  font-size: .8em;
 }

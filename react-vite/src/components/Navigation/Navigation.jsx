@@ -1,4 +1,4 @@
-import { NavLink, Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import OpenModalButton from "../OpenModalButton";
@@ -6,9 +6,15 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import logo from '/musichaze_logo_yellowBG.png'
 import "./Navigation.css";
+import { useEffect } from "react";
 
 function Navigation({ isLoaded }) {
+  const navigate = useNavigate()
   const sessionUser = useSelector(state => state.session.user)
+
+  useEffect(()=>{
+    if(!sessionUser) return navigate('/')
+  },[sessionUser, navigate])
 
   const sessionLinks = sessionUser ?
     (
@@ -37,15 +43,15 @@ function Navigation({ isLoaded }) {
   return (
     <>
       <ul id="navbar-full">
-        <div className="navbar-left">
-          <NavLink></NavLink>
-          <Link to="/discover">
-            <img id="nav-logo" src={logo} alt="" />
-          </Link>
-        </div>
-
-        <div className="navbar-right">
-          <ProfileButton />
+        <div>
+          <div className="navbar-left">
+            <Link to="/discover">
+              <img id="nav-logo" src={logo} alt="" />
+            </Link>
+          </div>
+          <div className="navbar-right">
+            <ProfileButton />
+          </div>
         </div>
         {isLoaded && sessionLinks}
       </ul>

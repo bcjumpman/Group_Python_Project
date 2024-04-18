@@ -1,21 +1,21 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faHeart, faComment } from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from "react-redux";
+
 import "./SongSorts.css"
 
 
-export default function AllSongsByUser(){
+export default function TopFiveSongsByLikes(){
   let allSongs = useSelector((state) => state.song.allSongs.songs);
-  const sessionUser = useSelector(state => state.session.user)
 
   if(allSongs === undefined){
     return
   } else {
-
-    const userSongs = allSongs.filter((song) => song.user_id === sessionUser.id)
+    const allSongsByLikes = allSongs.sort((b, a) => a.likes - b.likes)
+    const TopFiveSongsByLike = allSongsByLikes.slice(0,5)
     return (
       <div className="song-card-container">
-        {userSongs ? userSongs.map((song) => {
+        {TopFiveSongsByLike ? TopFiveSongsByLike.map((song) => {
           return(
             <div className='song-card' key={song.id}>
               <div>
@@ -34,7 +34,7 @@ export default function AllSongsByUser(){
               </div>
             </div>
           )
-        }) : console.log(!userSongs)}
+        }) : console.log(!TopFiveSongsByLike)}
       </div>
     )
   }
