@@ -42,13 +42,15 @@ def post_song(songForm):
 # Get all songs with like
 @song_routes.route('/')
 def getAllSongs():
-  songs = db.session.query(Song).join(Like, Song.id == Like.song_id).all()
+  songs = db.session.query(Song).join(Like, Song.id == Like.song_id).join(User, Song.user_id == User.id).join(Comment, Comment.song_id == Song.id).all()
 
   all_songs = []
 
   for song in songs:
     per_song = song.to_dict()
+    per_song['artist'] = song.user.artist_name
     per_song['likes'] = len(song.likes)
+    per_song['comments'] = len(song.comments)
     all_songs.append(per_song)
 
   return jsonify({'songs': all_songs})

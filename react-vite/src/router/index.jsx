@@ -4,6 +4,7 @@ import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import LandingPage from '../components/LandingPage'
 import Navigation from '../components/Navigation'
+import DiscoverPage from '../components/DiscoverPage';
 import UserPage from '../components/ProfilePage/ProfilePage';
 // import EditProfile from '../components/ProfilePage/EditProfile'
 
@@ -20,7 +21,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "/discover",
-            element: <h1>Welcome!</h1>,
+            element: <DiscoverPage />,
           },
           {
             path: "login",
