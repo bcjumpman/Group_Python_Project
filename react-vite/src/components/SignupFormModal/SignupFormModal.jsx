@@ -12,10 +12,10 @@ function SignupFormModal() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isArtist, setIsArtist] = useState("")
-  const [artistName, setArtistName] = useState("")
-  const [artistCountry, setArtistCountry] = useState("")
-  const [artistBio, setArtistBio] = useState("")
+  const [isArtist, setIsArtist] = useState(false)
+  const [artistName, setArtistName] = useState(null)
+  const [artistCountry, setArtistCountry] = useState(null)
+  const [artistBio, setArtistBio] = useState(null)
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
@@ -28,6 +28,7 @@ function SignupFormModal() {
           "Confirm Password field must be the same as the Password field",
       });
     }
+
 
     const serverResponse = await dispatch(
       thunkSignup({

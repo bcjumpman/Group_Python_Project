@@ -26,7 +26,7 @@ class SignUpForm(FlaskForm):
     password = StringField('password', validators=[DataRequired()])
     first_name = StringField('First Name', validators=[DataRequired()])
     last_name = StringField('Last Name', validators=[DataRequired()])
-    is_artist = BooleanField("Are you an artist?", validators=[DataRequired()])
+    is_artist = BooleanField("Are you an artist?")
     artist_name = StringField("Stage Name")
     artist_country = StringField("Country")
     artist_bio = TextAreaField("Biography")

@@ -7,16 +7,7 @@
 }
 
 #nav-logo {
-  width: 7%;
-
-  padding-left: 20px;
-}
-
-.site-title {
-  padding-top: 20px;
-  text-decoration: none;
-  font-size: 25px;
-  font-weight: bold;
+  width: 100px;
 }
 
 #navbar-left {
@@ -54,8 +45,8 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 5px;
-  border-bottom: 1px gray solid;
-  background-color: rgba(209, 208, 175, 0.807);
+  border-bottom: 2px #f1ed2a solid;
+  background-color:#6239ad;
   margin: 0%;
 }
 
