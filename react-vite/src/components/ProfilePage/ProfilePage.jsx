@@ -8,7 +8,7 @@ import * as sessionActions from '../../redux/session'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useModal } from '../../context/Modal'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import './ProfilePage.css'
 
@@ -17,9 +17,9 @@ const UserPage = () => {
     const { userId } = useParams()
     const navigate = useNavigate()
     const { closeModal } = useModal()
-    const sessionObj = useSelector(state => state.session.user)
+    // const sessionObj = useSelector(state => state.session.user)
     // const songObj = useSelector(state => state.song)
-    const commentObj = useSelector(state => state.comment)
+    // const commentObj = useSelector(state => state.comment)
 
     useEffect(() => {
         dispatch(getUserThunk(userId))
@@ -38,7 +38,7 @@ const UserPage = () => {
     }
 
     // const songs = Object.values(songObj).filter(song => song.userId === parseInt(userId))
-    const comments = Object.values(commentObj).filter(comment => comment.userId === parseInt(userId))
+    // const comments = Object.values(commentObj).filter(comment => comment.userId === parseInt(userId))
 
     const logout = (e) => {
         e.preventDefault()
@@ -94,24 +94,24 @@ const UserPage = () => {
                 {/* })} */}
             </div>
             <div id='user-comments'>
-                {comments.map(comment => {
-                    // parts of code from single song page #Comments
-                    <div className='edit-or-delete'>
-                        <button className='update-btn' type='button' onClick={() => handleUpdateComment(userId)}>Edit Comment</button>
-                        <OpenModalMenuItem
-                            itemText='Delete'
-                            className='delete-button'
-                            modalComponent={(
-                                <div id='confirm-delete'>
-                                    <h2>Confirm Delete</h2>
-                                    <span>Are you sure you want to remove this comment?</span>
-                                    <button id='delete-complete' type='button' onClick={() => handleDeleteComment(userId)}>Yes (Delete Comment)</button>
-                                    <button id='delete-cancel' type='button' onClick={closeModal}>No (Keep Comment)</button>
-                                </div>
-                            )}
-                        />
-                    </div>
-                })}
+                {/* {comments.map(comment => { */}
+                {/* // parts of code from single song page #Comments */}
+                <div className='edit-or-delete'>
+                    <button className='update-btn' type='button' onClick={() => handleUpdateComment(userId)}>Edit Comment</button>
+                    <OpenModalMenuItem
+                        itemText='Delete'
+                        className='delete-button'
+                        modalComponent={(
+                            <div id='confirm-delete'>
+                                <h2>Confirm Delete</h2>
+                                <span>Are you sure you want to remove this comment?</span>
+                                <button id='delete-complete' type='button' onClick={() => handleDeleteComment(userId)}>Yes (Delete Comment)</button>
+                                <button id='delete-cancel' type='button' onClick={closeModal}>No (Keep Comment)</button>
+                            </div>
+                        )}
+                    />
+                </div>
+                {/* })} */}
             </div>
             <div id='button-contain'>
                 <div id='logout-but'>

@@ -6,7 +6,7 @@ import LandingPage from '../components/LandingPage'
 import Navigation from '../components/Navigation'
 import DiscoverPage from '../components/DiscoverPage';
 import UserPage from '../components/ProfilePage/ProfilePage';
-// import EditProfile from '../components/ProfilePage/EditProfile'
+import EditProfile from '../components/ProfilePage/EditProfile'
 
 export const router = createBrowserRouter([
   {
@@ -37,10 +37,10 @@ export const router = createBrowserRouter([
         path: "/profile/:userId",
         element: <UserPage />
       },
-      // {
-      //   path: "/profile/:userId/edit",
-      //   element: <EditProfile />
-      // },
+      {
+        path: "/profile/:userId/edit",
+        element: <EditProfile />
+      },
       {
         path: "*",
         element: <h1>PAGE NOT FOUND</h1>
