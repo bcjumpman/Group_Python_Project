@@ -6,11 +6,13 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
+import profilePageReducer from "./profilePage";
 import songReducer from "./song";
 import commentReducer from "./comment";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
+  user: profilePageReducer,
   song: songReducer,
   comment: commentReducer,
 });

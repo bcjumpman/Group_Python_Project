@@ -3,6 +3,7 @@ import { getUserThunk } from '../../redux/profilePage'
 // import { loadUserCommentsThunk, editCommentThunk, deleteCommentThunk } from '../../redux/comment'
 import { deleteSongThunk } from '../../redux/song'
 import { deleteCommentThunk } from '../../redux/comment'
+import { AllSongsByUser } from '../SongSorts'
 import * as sessionActions from '../../redux/session'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
@@ -17,7 +18,7 @@ const UserPage = () => {
     const navigate = useNavigate()
     const { closeModal } = useModal()
     const sessionObj = useSelector(state => state.session.user)
-    const songObj = useSelector(state => state.song)
+    // const songObj = useSelector(state => state.song)
     const commentObj = useSelector(state => state.comment)
 
     useEffect(() => {
@@ -36,7 +37,7 @@ const UserPage = () => {
         navigate(`/profile/${userId}/edit`)
     }
 
-    const songs = Object.values(songObj).filter(song => song.userId === parseInt(userId))
+    // const songs = Object.values(songObj).filter(song => song.userId === parseInt(userId))
     const comments = Object.values(commentObj).filter(comment => comment.userId === parseInt(userId))
 
     const logout = (e) => {
@@ -72,24 +73,25 @@ const UserPage = () => {
                 <button className='update-btn' type='button' onClick={() => handleUpdateProfile(userId)}>Edit Profile</button>
             </div>
             <div id='artist-songs'>
-                {songs.map(song => {
-                    // code from discover page #Songs
-                    <div className='edit-or-delete'>
-                        <button className='update-btn' type='button' onClick={() => handleUpdateSong(userId)}>Update Song</button>
-                        <OpenModalMenuItem
-                            itemText='Delete'
-                            className='delete-button'
-                            modalComponent={(
-                                <div id='confirm-delete'>
-                                    <h2>Confirm Delete</h2>
-                                    <span>Are you sure you want to remove this song?</span>
-                                    <button id='delete-complete' type='button' onClick={() => handleDeleteSong(userId)}>Yes (Delete Song)</button>
-                                    <button id='delete-cancel' type='button' onClick={closeModal}>No (Keep Song)</button>
-                                </div>
-                            )}
-                        />
-                    </div>
-                })}
+                {/* {songs.map(song => { */}
+                {/* // code from discover page #Songs */}
+                <AllSongsByUser />
+                <div className='edit-or-delete'>
+                    <button className='update-btn' type='button' onClick={() => handleUpdateSong(userId)}>Update Song</button>
+                    <OpenModalMenuItem
+                        itemText='Delete'
+                        className='delete-button'
+                        modalComponent={(
+                            <div id='confirm-delete'>
+                                <h2>Confirm Delete</h2>
+                                <span>Are you sure you want to remove this song?</span>
+                                <button id='delete-complete' type='button' onClick={() => handleDeleteSong(userId)}>Yes (Delete Song)</button>
+                                <button id='delete-cancel' type='button' onClick={closeModal}>No (Keep Song)</button>
+                            </div>
+                        )}
+                    />
+                </div>
+                {/* })} */}
             </div>
             <div id='user-comments'>
                 {comments.map(comment => {
