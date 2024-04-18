@@ -5,7 +5,7 @@ import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -56,6 +56,7 @@ function ProfileButton() {
               <li className='menu-content'>
                 <li>{user.username}</li>
                 <li>{user.email}</li>
+                <NavLink id="to-profile" to="/profile/">Manage Profile</NavLink>
                 <li>
                   <button id="logout" onClick={logout}>Log Out</button>
                 </li>

@@ -31,19 +31,19 @@ export const router = createBrowserRouter([
             path: "signup",
             element: <SignupFormPage />,
           },
+          {
+            path: "/profile/",
+            element: <UserPage />
+          },
+          {
+            path: "/profile/edit",
+            element: <EditProfile />
+          },
+          {
+            path: "*",
+            element: <h1>PAGE NOT FOUND</h1>
+          },
         ],
-      },
-      {
-        path: "/profile/:userId",
-        element: <UserPage />
-      },
-      {
-        path: "/profile/:userId/edit",
-        element: <EditProfile />
-      },
-      {
-        path: "*",
-        element: <h1>PAGE NOT FOUND</h1>
       },
     ],
   },
