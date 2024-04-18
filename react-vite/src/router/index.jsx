@@ -4,6 +4,8 @@ import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import LandingPage from '../components/LandingPage'
 import Navigation from '../components/Navigation'
+import UserPage from '../components/ProfilePage/ProfilePage';
+// import EditProfile from '../components/ProfilePage/EditProfile'
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +31,18 @@ export const router = createBrowserRouter([
             element: <SignupFormPage />,
           },
         ],
+      },
+      {
+        path: "/profile/:userId",
+        element: <UserPage />
+      },
+      // {
+      //   path: "/profile/:userId/edit",
+      //   element: <EditProfile />
+      // },
+      {
+        path: "*",
+        element: <h1>PAGE NOT FOUND</h1>
       },
     ],
   },
