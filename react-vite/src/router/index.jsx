@@ -6,6 +6,7 @@ import LandingPage from '../components/LandingPage'
 import Navigation from '../components/Navigation'
 import DiscoverPage from '../components/DiscoverPage';
 import SongPage from '../components/SongPage';
+import UserPage from '../components/ProfilePage/ProfilePage';
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,14 @@ export const router = createBrowserRouter([
           {
             path: "songs/:id",
             element: <SongPage />,
+          },
+          {
+            path: "profile/:id",
+            element: <UserPage />,
+          },
+          {
+            path: "*",
+            element: <h1>USER NOT FOUND</h1>,
           },
         ],
       },
