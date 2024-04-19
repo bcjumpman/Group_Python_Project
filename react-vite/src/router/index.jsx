@@ -5,6 +5,7 @@ import Layout from './Layout';
 import LandingPage from '../components/LandingPage'
 import Navigation from '../components/Navigation'
 import DiscoverPage from '../components/DiscoverPage';
+import SongPage from '../components/SongPage';
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
           {
             path: "signup",
             element: <SignupFormPage />,
+          },
+          {
+            path: "songs/:id",
+            element: <SongPage />,
           },
         ],
       },

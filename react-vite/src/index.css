@@ -1,13 +1,15 @@
 /* TODO: Add sitewide styles */
 * {
   margin: 0;
+  text-decoration: none;
+}
+
+a {
+  color: black
 }
 
 body {
   background-color: #d4d4d4;
-  overflow-x: hidden;
-  width: 100%;
-
 }
 
 .hidden {
@@ -29,7 +31,6 @@ margin: 0 auto;
 }
 
 .v-breaker {
-  display: block;
   padding-left: 20px;
   margin-left: 20px;
   border-left: 1px solid #ac90cc;
