@@ -20,7 +20,7 @@ const SongPlayer = () => {
         player.current.audio.current.play();
       }
     }
-  }, [songs]);
+  }, [songs, player]);
 
   const playSong = () => {
     if (player.current.audio.current.paused) {
@@ -28,13 +28,13 @@ const SongPlayer = () => {
     }
   };
 
-  const pauseSong = () => {
-    if (!player.current.audio.current.paused) {
-      player.current.audio.current.pause();
-    }
-  };
+  // const pauseSong = () => {
+  //   if (!player.current.audio.current.paused) {
+  //     player.current.audio.current.pause();
+  //   }
+  // };
 
-  function skipToNextSong(e) {
+  function skipToNextSong() {
     const newSongs = [...prevSongs];
     if (songs && songs[0]) {
       newSongs.unshift(songs[0]);
@@ -51,7 +51,7 @@ const SongPlayer = () => {
     }
   }
 
-  function skipToPreviousSong(e) {
+  function skipToPreviousSong() {
     if (songTime > 1) {
       console.log("Starting over");
       player.current.audio.current.currentTime = 0;
