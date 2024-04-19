@@ -63,11 +63,11 @@ const ProfileUpdate = () => {
             artist_bio: artistBio
         }
 
-        const updateUser = await dispatch(editUserThunk(userData, userId))
+        const updateUser = await dispatch(editUserThunk({ userId }, userData))
         if (updateUser && updateUser.errors) {
             setErrors({ ...updateUser.errors })
         } else {
-            // dispatch(editUser(updateUser))
+            dispatch(editUserThunk(updateUser))
             closeModal()
         }
     }
