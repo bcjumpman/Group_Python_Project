@@ -1,22 +1,24 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useState, useEffect } from "react"
-import { useNavigate, useParams } from "react-router-dom"
-import { editUser } from "../../redux/profilePage"
-import './EditProfile.css'
+import { useParams } from "react-router-dom"
+import { editUserThunk } from "../../redux/profilePage"
+import { useModal } from "../../context/Modal"
+import './EditProfileModal.css'
 
 const ProfileUpdate = () => {
     const { userId } = useParams()
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
+    const { closeModal } = useModal();
     const currUser = useSelector(state => state.user[userId])
 
-    const [firstName, setFirstName] = useState(currUser.first_name || "")
-    const [lastName, setLastName] = useState(currUser.last_name || "")
-    const [email, setEmail] = useState(currUser.email || "")
-    const [username, setUsername] = useState(currUser.username || "")
-    const [artistName, setArtistName] = useState(currUser.artist_name || "")
-    const [artistCountry, setArtistCountry] = useState(currUser.artist_country || "")
-    const [artistBio, setArtistBio] = useState(currUser.artist_bio || "")
+    const [firstName, setFirstName] = useState(currUser?.firstName || "")
+    const [lastName, setLastName] = useState(currUser?.lastName || "")
+    const [email, setEmail] = useState(currUser?.email || "")
+    const [username, setUsername] = useState(currUser?.username || "")
+    const [artistName, setArtistName] = useState(currUser?.artistName || "")
+    const [artistCountry, setArtistCountry] = useState(currUser?.artistCountry || "")
+    const [artistBio, setArtistBio] = useState(currUser?.artistBio || "")
     const [errors, setErrors] = useState({})
     const [submit, setSubmit] = useState(false)
 
@@ -26,12 +28,12 @@ const ProfileUpdate = () => {
         setSubmit(true)
 
         if (!firstName) {
-            err.first_name = "First name is required"
+            err.firstName = "First name is required"
             setErrors(err)
             return err
         }
         if (!lastName) {
-            err.last_name = "Last name is required"
+            err.lastName = "Last name is required"
             setErrors(err)
             return err
         }
@@ -46,29 +48,28 @@ const ProfileUpdate = () => {
             return err
         }
         if (!artistName) {
-            err.artist_name = "Name of artist is required"
+            err.artistName = "Name of artist is required"
             setErrors(err)
             return err
         }
+
         const userData = {
             first_name: firstName,
             last_name: lastName,
             email,
             username,
             artist_name: artistName,
+            artist_country: artistCountry,
+            artist_bio: artistBio
         }
 
-        const updateUser = await dispatch(editUser(userData, userId))
-        if (updateUser.errors) {
-            setErrors({ ...updateUser.errors, ...errors })
+        const updateUser = await dispatch(editUserThunk(userData, userId))
+        if (updateUser && updateUser.errors) {
+            setErrors({ ...updateUser.errors })
         } else {
-            dispatch(editUser(updateUser))
-            navigate(`/profile/${updateUser.id}`)
+            // dispatch(editUser(updateUser))
+            closeModal()
         }
-    }
-
-    const handleCancel = () => {
-        navigate(`/profile/${userId}`)
     }
 
     useEffect(() => {
@@ -82,7 +83,7 @@ const ProfileUpdate = () => {
     }, [firstName, lastName, email, username, artistName, submit])
 
     return (
-        <div id="">
+        <div id="form-modal-contain">
             <form onSubmit={handleSubmit} id="form">
                 <h2>Update Profile Info</h2>
                 <div>
@@ -155,9 +156,9 @@ const ProfileUpdate = () => {
                         />
                     </label>
                 </div>
+                <button id="submit" type="submit">Update User</button>
+                <button id="cancel" type="button" onClick={closeModal}>Cancel Update</button>
             </form>
-            <button id="submit" type="submit">Update User</button>
-            <button id="cancel" type="button" onClick={handleCancel}>Cancel Update</button>
         </div>
     )
 }

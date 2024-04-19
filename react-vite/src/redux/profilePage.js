@@ -11,7 +11,7 @@ export const editUser = (user) => ({
 });
 
 export const getUserThunk = (userId) => async (dispatch) => {
-  const res = await fetch(`/api/users/${userId}`);
+  const res = await fetch(`/api/profile/${userId}`);
   if (res.ok) {
     const userId = await res.json();
     dispatch(getUser(userId));
@@ -22,7 +22,7 @@ export const getUserThunk = (userId) => async (dispatch) => {
   }
 };
 export const editUserThunk = (userId, updatedUserData) => async (dispatch) => {
-  const res = await fetch(`/api/users/${userId}`, {
+  const res = await fetch(`/api/profile/${userId}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(updatedUserData),
@@ -34,23 +34,22 @@ export const editUserThunk = (userId, updatedUserData) => async (dispatch) => {
   }
 };
 
-const initialState = { userProfile: {} };
+const initialState = { userProfile: {}, user: {} };
 
 export default function profilePageReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case GET_USER:
       newState = { ...state };
-      newState = { ...state.userProfile };
+      // newState = { ...state.userProfile };
       newState.userProfile = action.user;
       return newState;
     case EDIT_USER: {
-      if (newState.user[action.user.id]) {
-        newState.user[action.user.id] = {
-          ...newState.user[action.user.id],
-          ...action.user,
-        };
-      }
+      newState = { ...state };
+      newState.user[action.user.id] = {
+        ...newState.user[action.user.id],
+        ...action.user,
+      };
       return newState;
     }
     default:

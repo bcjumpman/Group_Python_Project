@@ -6,7 +6,6 @@ import LandingPage from '../components/LandingPage'
 import Navigation from '../components/Navigation'
 import DiscoverPage from '../components/DiscoverPage';
 import UserPage from '../components/ProfilePage/ProfilePage';
-import EditProfile from '../components/ProfilePage/EditProfile'
 
 export const router = createBrowserRouter([
   {
@@ -32,12 +31,8 @@ export const router = createBrowserRouter([
             element: <SignupFormPage />,
           },
           {
-            path: "/profile/",
+            path: "profile/:userId",
             element: <UserPage />
-          },
-          {
-            path: "/profile/edit",
-            element: <EditProfile />
           },
           {
             path: "*",
