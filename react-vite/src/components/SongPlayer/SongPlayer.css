@@ -1,11 +1,11 @@
 .react-h5-audio-player {
     position: fixed;
-    bottom:0;
+    bottom: 0;
+    left: 0;
     width: 100%;
-
     background-color: #6239ad;
     border-top: 2px solid #f1ed2a;
-    padding: 10px 0 10px 0;
+    padding: 10px 0;
 }
 
 .rhap_main {
@@ -14,14 +14,13 @@
     justify-content: center;
     gap: 5px;
     align-items: center;
-    width: 1200px;
-    margin: auto;
+    margin: 0 auto;
 }
 
 .rhap_progress-section {
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 20px;
     color: #382349;
 }
 .rhap_progress-section * {
@@ -32,7 +31,8 @@
 
 .rhap_controls-section {
     display: flex;
-    gap: 40px;
+    justify-content: center;
+    gap: 20px;
 }
 .rhap_main-controls {
     display: flex;

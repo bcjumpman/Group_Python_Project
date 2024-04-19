@@ -46,11 +46,9 @@ const SongPlayer = () => {
     if (!tempSongs.length) {
       player.current.audio.current.audio = null;
     } else {
-      player.current.audio.current.audio.src = tempSongs[0].song_url; // Load the new song
+      player.current.audio.current.audio.src = tempSongs[0].song_url; // Loading new song
       playSong();
     }
-
-    console.log("skip\nsongs:", tempSongs, "\nprev songs:", newSongs);
   }
 
   function skipToPreviousSong(e) {
@@ -67,8 +65,6 @@ const SongPlayer = () => {
     const tempSongs = [...prevSongs];
     tempSongs.shift();
     setPrevSongs(tempSongs);
-
-    console.log("prev\nsongs:", newSongs, "\nprev songs:", tempSongs);
   }
 
   return (
