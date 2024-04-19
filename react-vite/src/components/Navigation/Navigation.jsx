@@ -4,41 +4,33 @@ import ProfileButton from "./ProfileButton";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-import logo from '/musichaze_logo_yellowBG.png'
+import logo from "/musichaze_logo_yellowBG.png";
 import "./Navigation.css";
-import { useEffect } from "react";
+import SongPlayer from "../SongPlayer";
 
 function Navigation({ isLoaded }) {
-  const navigate = useNavigate()
-  const sessionUser = useSelector(state => state.session.user)
+  const sessionUser = useSelector((state) => state.session.user);
 
-  useEffect(()=>{
-    if(!sessionUser) return navigate('/')
-  },[sessionUser, navigate])
-
-  const sessionLinks = sessionUser ?
-    (
+  const sessionLinks = sessionUser ? (
+    <li>
+      <ProfileButton user={sessionUser} />
+    </li>
+  ) : (
+    <>
       <li>
-        <ProfileButton user={sessionUser} />
+        <OpenModalButton
+          buttonText="Log In"
+          modalComponent={<LoginFormModal />}
+        />
       </li>
-    ) : (
-      <>
-        <li>
-          <OpenModalButton
-            buttonText="Log In"
-            modalComponent={<LoginFormModal />}
-          />
-        </li>
-        <li>
-          <OpenModalButton
-            buttonText="Sign Up"
-            modalComponent={<SignupFormModal />}
-          />
-        </li>
-
-      </>
-    );
-
+      <li>
+        <OpenModalButton
+          buttonText="Sign Up"
+          modalComponent={<SignupFormModal />}
+        />
+      </li>
+    </>
+  );
 
   return (
     <>
@@ -56,7 +48,7 @@ function Navigation({ isLoaded }) {
         {isLoaded && sessionLinks}
       </ul>
       <Outlet />
-      {/* This lies the location for the media player */}
+      <SongPlayer />
     </>
   );
 }
