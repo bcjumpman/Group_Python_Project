@@ -6,7 +6,7 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import logo from "/musichaze_logo_yellowBG.png";
 import "./Navigation.css";
-import Footer from "./footer";
+import SongPlayer from "../SongPlayer";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -48,8 +48,7 @@ function Navigation({ isLoaded }) {
         {isLoaded && sessionLinks}
       </ul>
       <Outlet />
-      <Footer />
-      {/* This lies the location for the media player */}
+      <SongPlayer />
     </>
   );
 }

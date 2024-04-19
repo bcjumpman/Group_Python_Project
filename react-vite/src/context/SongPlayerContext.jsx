@@ -6,6 +6,7 @@ export const useSongContext = () => useContext(SongContext);
 
 export default function SongPlayerContext({ children }) {
   const [songs, setSongs] = useState([]);
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [prevSongs, setPrevSongs] = useState([]);
   const [songTime, setSongTime] = useState(0);
 
@@ -60,7 +61,8 @@ export default function SongPlayerContext({ children }) {
     <SongContext.Provider
       value={{
         songs,
-        setSongs,
+        currentSongIndex,
+        setCurrentSongIndex,
         prevSongs,
         setPrevSongs,
         songTime,
