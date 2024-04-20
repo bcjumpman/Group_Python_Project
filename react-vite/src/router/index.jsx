@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "*",
-            element: <h1>USER NOT FOUND</h1>,
+            element: <h1>PAGE NOT FOUND</h1>,
           },
         ],
       },

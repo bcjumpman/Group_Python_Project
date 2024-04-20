@@ -1,6 +1,4 @@
-import { getUserThunk } from '../../redux/profilePage'
-// import { getUserSongsThunk, createSongThunk, editSongThunk, deleteSongThunk } from '../../redux/song'
-// import { loadUserCommentsThunk, editCommentThunk, deleteCommentThunk } from '../../redux/comment'
+import { deleteUserThunk, getUserThunk } from '../../redux/profilePage'
 import { deleteSongThunk } from '../../redux/song'
 import { deleteCommentThunk } from '../../redux/comment'
 import { AllSongsByUser } from '../SongSorts'
@@ -11,6 +9,8 @@ import { useModal } from '../../context/Modal'
 import { useDispatch, useSelector } from 'react-redux'
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import ProfileUpdate from './EditProfileModal'
+import CreateSong from '../SongPage/SongForm'
+import SongUpdate from '../SongPage/EditSong'
 import './ProfilePage.css'
 
 const UserPage = () => {
@@ -28,12 +28,8 @@ const UserPage = () => {
 
     const user = useSelector(state => state.session.user ? state.session.user : null)
 
-    const handleUpdateSong = user => {
-        navigate(`/profile/${user.id}/edit`)
-    }
-
-    const handleUpdateComment = user => {
-        navigate(`/profile/${user.id}/edit`)
+    const handleUpdateComment = userId => {
+        navigate(`/profile/${userId}/edit`)
     }
 
     // const songs = Object.values(songObj).filter(song => song.userId === parseInt(userId))
@@ -45,18 +41,20 @@ const UserPage = () => {
         navigate('/')
     }
 
-    const handleDeleteProfile = user => {
-        dispatch(sessionActions.removeUser(user.id))
+    const handleDeleteProfile = async (userId) => {
+        const deletedUser = await dispatch(deleteUserThunk(userId));
+        if (deletedUser) {
+            navigate('/')
+        }
+    }
+
+    const handleDeleteSong = userId => {
+        dispatch(deleteSongThunk(userId))
         closeModal()
     }
 
-    const handleDeleteSong = user => {
-        dispatch(deleteSongThunk(user.id))
-        closeModal()
-    }
-
-    const handleDeleteComment = user => {
-        dispatch(deleteCommentThunk(user.id))
+    const handleDeleteComment = userId => {
+        dispatch(deleteCommentThunk(userId))
         closeModal()
     }
 
@@ -89,8 +87,17 @@ const UserPage = () => {
                     {user.is_artist ?
                         <>
                             <AllSongsByUser />
+                            <OpenModalMenuItem
+                                itemText='New Song'
+                                className='create-button'
+                                modalComponent={<CreateSong />}
+                            />
                             <div className='edit-or-delete'>
-                                <button className='update-btn' type='button' onClick={() => handleUpdateSong(user.id)}>Update Song</button>
+                                <OpenModalMenuItem
+                                    itemText='Edit Song'
+                                    className='edit-button'
+                                    modalComponent={<SongUpdate />}
+                                />
                                 <OpenModalMenuItem
                                     itemText='Delete'
                                     className='delete-button'
@@ -142,7 +149,7 @@ const UserPage = () => {
                                 <div id='confirm-delete'>
                                     <h2>Confirm Delete</h2>
                                     <span>Are you sure you want to remove this user?</span>
-                                    <button id='delete-complete' type='button' onClick={() => handleDeleteProfile(user.id)}>Yes (Delete User)</button>
+                                    <button id='delete-complete' type='button' onClick={handleDeleteProfile}>Yes (Delete User)</button>
                                     <button id='delete-cancel' type='button' onClick={closeModal}>No (Keep User)</button>
                                 </div>
                             )}

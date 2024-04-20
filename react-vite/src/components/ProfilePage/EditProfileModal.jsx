@@ -10,6 +10,7 @@ const ProfileUpdate = () => {
     const dispatch = useDispatch()
     // const navigate = useNavigate()
     const { closeModal } = useModal();
+    const user = useSelector(state => state.session.user ? state.session.user : null)
     const currUser = useSelector(state => state.user[userId])
 
     const [firstName, setFirstName] = useState(currUser?.firstName || "")
@@ -63,9 +64,10 @@ const ProfileUpdate = () => {
             artist_bio: artistBio
         }
 
-        const updateUser = await dispatch(editUserThunk({ userId }, userData))
+        const updateUser = await dispatch(editUserThunk(userId, userData))
+        console.log(userId)
         if (updateUser && updateUser.errors) {
-            setErrors({ ...updateUser.errors })
+            setErrors({ ...updateUser.errors, ...errors })
         } else {
             dispatch(editUserThunk(updateUser))
             closeModal()
@@ -127,39 +129,42 @@ const ProfileUpdate = () => {
                         />
                     </label>
                     {errors.username && <p className="err-msg">{errors.username}</p>}
-                    <label className="user-label">
-                        Artist Name
-                        <input
-                            type="text"
-                            placeholder="Artist Name"
-                            value={artistName}
-                            onChange={(e) => setArtistName(e.target.value)}
-                        />
-                    </label>
-                    {errors.artistName && <p className="err-msg">{errors.artistName}</p>}
-                    <label className="user-label">
-                        Country
-                        <input
-                            type="text"
-                            placeholder="Country"
-                            value={artistCountry}
-                            onChange={(e) => setArtistCountry(e.target.value)}
-                        />
-                    </label>
-                    <label className="user-label">
-                        Biography
-                        <input
-                            type="text"
-                            placeholder="Bio"
-                            value={artistBio}
-                            onChange={(e) => setArtistBio(e.target.value)}
-                        />
-                    </label>
+                    {user.is_artist && (
+                        <>
+                            <label className="user-label">
+                                Artist Name
+                                <input
+                                    type="text"
+                                    placeholder="Artist Name"
+                                    value={artistName}
+                                    onChange={(e) => setArtistName(e.target.value)}
+                                />
+                            </label>
+                            {errors.artistName && <p className="err-msg">{errors.artistName}</p>}
+                            <label className="user-label">
+                                Country
+                                <input
+                                    type="text"
+                                    placeholder="Country"
+                                    value={artistCountry}
+                                    onChange={(e) => setArtistCountry(e.target.value)}
+                                />
+                            </label>
+                            <label className="user-label">
+                                Biography
+                                <input
+                                    type="text"
+                                    placeholder="Bio"
+                                    value={artistBio}
+                                    onChange={(e) => setArtistBio(e.target.value)}
+                                />
+                            </label>
+                        </>)}
                 </div>
                 <button id="submit" type="submit">Update User</button>
                 <button id="cancel" type="button" onClick={closeModal}>Cancel Update</button>
-            </form>
-        </div>
+            </form >
+        </div >
     )
 }
 
