@@ -34,10 +34,9 @@ const SongPlayer = () => {
     tempSongs.shift();
     setSongs(tempSongs);
 
-    // Add console.log statement here to log the next song to be played
-    if (tempSongs.length) {
-      console.log("Next song to be played:", tempSongs[0]);
-    }
+    // if (tempSongs.length) {
+    //   console.log("Next song to be played:", tempSongs[0]);
+    // }
 
     if (!tempSongs.length) {
       player.current.audio.current.src = null;
