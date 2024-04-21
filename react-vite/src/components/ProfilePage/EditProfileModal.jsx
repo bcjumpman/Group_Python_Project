@@ -69,7 +69,6 @@ const ProfileUpdate = () => {
         if (updateUser && updateUser.errors) {
             setErrors({ ...updateUser.errors, ...errors })
         } else {
-            dispatch(editUserThunk(updateUser))
             closeModal()
         }
     }

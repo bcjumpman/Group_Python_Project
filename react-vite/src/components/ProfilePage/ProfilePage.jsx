@@ -3,7 +3,7 @@ import { deleteSongThunk } from '../../redux/song'
 import { deleteCommentThunk } from '../../redux/comment'
 import { AllSongsByUser } from '../SongSorts'
 import * as sessionActions from '../../redux/session'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useModal } from '../../context/Modal'
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,7 +15,7 @@ import './ProfilePage.css'
 
 const UserPage = () => {
     const dispatch = useDispatch()
-    // const { userId } = useParams()
+    const { userId } = useParams()
     const navigate = useNavigate()
     const { closeModal } = useModal()
     // const sessionObj = useSelector(state => state.session.user)
@@ -24,7 +24,7 @@ const UserPage = () => {
 
     useEffect(() => {
         dispatch(getUserThunk())
-    }, [dispatch])
+    }, [dispatch,])
 
     const user = useSelector(state => state.session.user ? state.session.user : null)
 
@@ -41,10 +41,11 @@ const UserPage = () => {
         navigate('/')
     }
 
-    const handleDeleteProfile = async (userId) => {
-        const deletedUser = await dispatch(deleteUserThunk(userId));
+    const handleDeleteProfile = userId => {
+        const deletedUser = dispatch(deleteUserThunk(userId));
         if (deletedUser) {
             navigate('/')
+            closeModal()
         }
     }
 
@@ -77,7 +78,7 @@ const UserPage = () => {
                         itemText='Edit Profile'
                         className='edit-button'
                         modalComponent={(
-                            <ProfileUpdate />
+                            <ProfileUpdate userId={userId} />
                         )} />
                     {/* <button className='update-btn' type='button' onClick={() => handleUpdateProfile(user.id)}>Edit Profile</button> */}
                 </div>
@@ -149,7 +150,7 @@ const UserPage = () => {
                                 <div id='confirm-delete'>
                                     <h2>Confirm Delete</h2>
                                     <span>Are you sure you want to remove this user?</span>
-                                    <button id='delete-complete' type='button' onClick={handleDeleteProfile}>Yes (Delete User)</button>
+                                    <button id='delete-complete' type='button' onClick={() => handleDeleteProfile(user.id)}>Yes (Delete User)</button>
                                     <button id='delete-cancel' type='button' onClick={closeModal}>No (Keep User)</button>
                                 </div>
                             )}

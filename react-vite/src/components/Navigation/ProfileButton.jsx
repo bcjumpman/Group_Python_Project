@@ -43,7 +43,7 @@ function ProfileButton() {
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : "hidden")
-  const profURL = `/profile/${user.id}`
+  const profURL = `/profile`
 
   return (
     <>
