@@ -8,31 +8,21 @@ const SongPlayer = () => {
     useSongContext();
   const player = createRef();
 
-  console.log("Current songs:", songs);
-
+  /* loading audio */
   useEffect(() => {
     if (songs.length > 0) {
       const randomIndex = Math.floor(Math.random() * songs.length);
       const randomSong = songs[randomIndex];
       player.current.audio.current.src = randomSong.song_url;
       player.current.audio.current.load();
-      if (player.current.audio.current.paused) {
-        player.current.audio.current.play();
-      }
     }
-  }, [songs, player]);
+  }, [songs]);
 
   const playSong = () => {
     if (player.current.audio.current.paused) {
       player.current.audio.current.play();
     }
   };
-
-  // const pauseSong = () => {
-  //   if (!player.current.audio.current.paused) {
-  //     player.current.audio.current.pause();
-  //   }
-  // };
 
   function skipToNextSong() {
     const newSongs = [...prevSongs];
@@ -43,11 +33,15 @@ const SongPlayer = () => {
     const tempSongs = [...songs];
     tempSongs.shift();
     setSongs(tempSongs);
+
+    // if (tempSongs.length) {
+    //   console.log("Next song to be played:", tempSongs[0]);
+    // }
+
     if (!tempSongs.length) {
-      player.current.audio.current.audio = null;
+      player.current.audio.current.src = null;
     } else {
-      player.current.audio.current.audio.src = tempSongs[0].song_url; // Loading new song
-      playSong();
+      player.current.audio.current.src = tempSongs[0].song_url;
     }
   }
 
@@ -68,7 +62,9 @@ const SongPlayer = () => {
   }
 
   return (
-    <div className="react-h5-audio-player">
+    <div className="react-h5-audio-player" onClick={playSong}>
+      {" "}
+      {/* testing if song does NOT auto play */}
       <AudioPlayer
         ref={player}
         volume={0.1}
@@ -80,8 +76,6 @@ const SongPlayer = () => {
         onClickNext={skipToNextSong}
         onClickPrevious={skipToPreviousSong}
         autoPlayAfterSrcChange={false}
-        // onPlay={playSong}
-        // onPause={pauseSong}
       />
     </div>
   );
