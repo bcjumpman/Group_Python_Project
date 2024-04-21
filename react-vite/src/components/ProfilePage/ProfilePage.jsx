@@ -16,6 +16,7 @@ import './ProfilePage.css'
 const UserPage = () => {
     const dispatch = useDispatch()
     const { userId } = useParams()
+    const toInt = parseInt(userId)
     const navigate = useNavigate()
     const { closeModal } = useModal()
     // const sessionObj = useSelector(state => state.session.user)
@@ -23,8 +24,8 @@ const UserPage = () => {
     // const commentObj = useSelector(state => state.comment)
 
     useEffect(() => {
-        dispatch(getUserThunk())
-    }, [dispatch,])
+        dispatch(getUserThunk(toInt))
+    }, [dispatch, toInt])
 
     const user = useSelector(state => state.session.user ? state.session.user : null)
 
@@ -41,16 +42,16 @@ const UserPage = () => {
         navigate('/')
     }
 
-    const handleDeleteProfile = userId => {
-        const deletedUser = dispatch(deleteUserThunk(userId));
+    const handleDeleteProfile = toInt => {
+        const deletedUser = dispatch(deleteUserThunk(toInt));
         if (deletedUser) {
             navigate('/')
             closeModal()
         }
     }
 
-    const handleDeleteSong = userId => {
-        dispatch(deleteSongThunk(userId))
+    const handleDeleteSong = toInt => {
+        dispatch(deleteSongThunk(toInt))
         closeModal()
     }
 
@@ -78,7 +79,7 @@ const UserPage = () => {
                         itemText='Edit Profile'
                         className='edit-button'
                         modalComponent={(
-                            <ProfileUpdate userId={userId} />
+                            <ProfileUpdate toInt={toInt} />
                         )} />
                     {/* <button className='update-btn' type='button' onClick={() => handleUpdateProfile(user.id)}>Edit Profile</button> */}
                 </div>

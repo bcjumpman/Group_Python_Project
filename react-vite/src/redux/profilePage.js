@@ -16,8 +16,9 @@ export const deleteUser = (userId) => ({
 });
 
 export const getUserThunk = (userId) => async (dispatch) => {
-  console.log(userId);
-  const res = await fetch(`/api/users/${userId}`);
+  const toInt = parseInt(userId);
+  console.log(toInt);
+  const res = await fetch(`/api/users/${toInt}`);
   if (res.ok) {
     const givenUser = await res.json();
     dispatch(getUser(givenUser));
