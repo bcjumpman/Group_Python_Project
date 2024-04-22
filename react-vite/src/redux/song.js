@@ -89,17 +89,17 @@ export const getUserSongsThunk = (userId) => async (dispatch) => {
 };
 
 export const getSongThunk = (songId) => async (dispatch) => {
-  console.log('hi2')
+  console.log("hi2");
   const res = await fetch(`/api/songs/${songId}`);
   if (res.ok) {
     const song = await res.json();
     await dispatch(loadSong(song));
-    return song
+    return song;
   }
 };
 
 export const createSongThunk = (data) => async (dispatch) => {
-  console.log('2 ----->>>>', data.get('song_url'))
+  console.log("2 ----->>>>", data.get("song_url"));
   const res = await fetch("/api/songs/new", {
     method: "POST",
     body: data,
@@ -170,7 +170,9 @@ export const deleteLikeThunk =
   };
 
 const initialState = {
-  allSongs: {},
+  allSongs: {
+    songs: [],
+  },
   singleSong: {},
   userSongs: {},
   userLikedSongs: {},

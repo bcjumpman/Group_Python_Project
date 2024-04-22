@@ -1,18 +1,50 @@
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faHeart, faComment } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addLikeThunk, deleteLikeThunk } from "../../redux/song";
 import "./SongSorts.css"
 
 
 export default function FeaturedSong() {
+  const dispatch = useDispatch();
   let allSongs = useSelector((state) => state.song.allSongs.songs);
+  const userLikes = useSelector((state) => state.song.userLikedSongs);
+  const currentUserId = useSelector((state) => state.session.user.id);
 
-  if (allSongs === undefined) {
-    return
-  } else {
-    const song = allSongs[Math.floor(Math.random() * allSongs.length)]
+  const [randomSong, setRandomSong] = useState(null);
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
+
+  useEffect(() => {
+    if (allSongs && allSongs.length > 0) {
+      const randomIndex = Math.floor(Math.random() * allSongs.length);
+      const selectedSong = allSongs[randomIndex];
+      setRandomSong(selectedSong);
+      setIsLiked(userLikes[selectedSong.id] || false);
+      setLikeCount(selectedSong.likes || 0);
+    }
+  }, [allSongs, userLikes]);
+
+  const handleLike = (songId) => {
+    if (!randomSong) return;
+
+    if (isLiked) {
+      setLikeCount((prev) => prev - 1);
+      dispatch(deleteLikeThunk(songId, currentUserId));
+    } else {
+      setLikeCount((prev) => prev + 1);
+      dispatch(addLikeThunk(songId, currentUserId));
+    }
+    setIsLiked(!isLiked);
+  };
+
+  if (!randomSong) {
+    return <div>Loading song or no song available...</div>;
+  }
     return (
+      <>
       <div className="song-card-container">
         <div className='song-card'>
           <div>
@@ -26,11 +58,13 @@ export default function FeaturedSong() {
             <div className='song-card-icon-stats'>
               <span><FontAwesomeIcon icon={faComment} /> {song.comments}</span>
               <span><FontAwesomeIcon icon={faPlay} /> {song.plays}</span>
-              <span><FontAwesomeIcon icon={faHeart} /> {song.likes}</span>
+              <span onClick={handleClick}>
+              <FontAwesomeIcon icon={faHeart} /> {likeCount}</span>
             </div>
           </div>
         </div>
       </div>
-    )
-  }
+    </div>
+  </>
+  )
 }
