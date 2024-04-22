@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faHeart, faComment } from '@fortawesome/free-solid-svg-icons'
 import { Link, useParams } from 'react-router-dom';
-import { getSongThunk } from '../../redux/song';
+import { getSongThunk, getSongsThunk  } from '../../redux/song';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import "./SongSorts.css"
@@ -13,6 +13,7 @@ export default function SongById(){
 
   useEffect(()=>{
     dispatch(getSongThunk(id))
+    dispatch(getSongsThunk())
   }, [dispatch, id])
 
   if(song === undefined){

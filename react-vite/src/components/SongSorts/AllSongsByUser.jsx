@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from 'react-router-dom'
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import SongUpdate from '../SongPage/EditSong'
-import { deleteSongThunk } from '../../redux/song'
+import { deleteSongThunk, getSongsThunk, getUserSongsThunk } from '../../redux/song'
 import { useModal } from '../../context/Modal';
 import "./SongSorts.css"
 // import { useEffect } from 'react';
@@ -14,19 +14,21 @@ export default function AllSongsByUser() {
   const dispatch = useDispatch()
   let allSongs = useSelector((state) => state.song.allSongs.songs);
   const sessionUser = useSelector(state => state.session.user)
-
   const { closeModal } = useModal()
-  // let user = useSelector(state => state.session.user ? state.session.user : null)
 
   const handleDeleteSong = songId => {
     dispatch(deleteSongThunk(songId))
     closeModal()
   }
 
+
+  useEffect(()=>{
+    dispatch(getUserSongsThunk(sessionUser.id))
+  }, [dispatch, closeModal])
+
   if (allSongs === undefined) {
     return
   } else {
-
     const userSongs = allSongs.filter((song) => song.user_id === sessionUser.id)
     return (
       <div className="song-card-container">

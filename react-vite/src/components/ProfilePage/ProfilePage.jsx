@@ -9,6 +9,7 @@ import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import ProfileUpdate from './EditProfileModal'
 import CreateSong from '../SongPage/SongForm'
 import './ProfilePage.css'
+import { getSongsThunk } from '../../redux/song'
 
 const UserPage = () => {
     const dispatch = useDispatch()
@@ -19,10 +20,6 @@ const UserPage = () => {
     // const sessionObj = useSelector(state => state.session.user)
     // const songObj = useSelector(state => state.song)
     // const commentObj = useSelector(state => state.comment)
-
-    useEffect(() => {
-        dispatch(getUserThunk(toInt))
-    }, [dispatch, toInt])
 
     let user = useSelector(state => state.session.user ? state.session.user : null)
 

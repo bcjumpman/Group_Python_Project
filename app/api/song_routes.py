@@ -10,7 +10,7 @@ song_routes = Blueprint('songs', __name__)
 # Get all songs with like
 @song_routes.route('/')
 def getAllSongs():
-  songs = db.session.query(Song).join(Like).join(User).all()
+  songs = db.session.query(Song).all()
 
   all_songs = []
 
