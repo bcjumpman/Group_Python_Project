@@ -4,10 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from 'react-router-dom'
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import SongUpdate from '../SongPage/EditSong'
-import { deleteSongThunk, getSongsThunk, getUserSongsThunk } from '../../redux/song'
+import { deleteSongThunk, getUserSongsThunk } from '../../redux/song'
 import { useModal } from '../../context/Modal';
+import { useEffect } from 'react';
 import "./SongSorts.css"
-// import { useEffect } from 'react';
 
 
 export default function AllSongsByUser() {
@@ -24,7 +24,7 @@ export default function AllSongsByUser() {
 
   useEffect(()=>{
     dispatch(getUserSongsThunk(sessionUser.id))
-  }, [dispatch, closeModal])
+  }, [dispatch, closeModal, sessionUser])
 
   if (allSongs === undefined) {
     return

@@ -36,9 +36,8 @@ export default function SongById(){
               <span><FontAwesomeIcon icon={faHeart} /> {song?.likes}</span>
             </div>
           </div>
-          {error && <div style={{ color: "red" }}>{error}</div>}
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }

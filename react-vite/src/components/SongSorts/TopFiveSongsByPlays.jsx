@@ -1,45 +1,4 @@
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faPlay, faHeart, faComment } from '@fortawesome/free-solid-svg-icons'
-// import { useSelector } from "react-redux";
-// import { Link } from "react-router-dom"
-// import "./SongSorts.css"
-
-// export default function TopFiveSongsByPlays(){
-//   let allSongs = useSelector((state) => state.song.allSongs.songs);
-
-//   if(allSongs === undefined){
-//     return
-//   } else {
-//     const allSongsByPlays = allSongs.sort((b, a) => a.plays - b.plays)
-//     const topFiveSongsByPlays = allSongsByPlays.slice(0,5)
-//     return (
-//       <div className="song-card-container">
-//         {topFiveSongsByPlays ? topFiveSongsByPlays.map((song) => {
-//           return(
-//             <div className='song-card' key={song.id}>
-//               <div>
-//               <img className="song-card-cover-art" src={song.cover_art} alt="cover art for song" />
-//               </div>
-//               <div className='song-card-data'>
-//                 <div className='song-card-headers'>
-//                   <Link to={`/songs/${song.id}`}><h4>{song.name}</h4></Link>
-//                   <span className='song-card-artist'>Uploaded by {song.artist}</span>
-//                 </div>
-//                 <div className='song-card-icon-stats'>
-//                   <span><FontAwesomeIcon icon={faComment} /> {song.comments}</span>
-//                   <span><FontAwesomeIcon icon={faPlay} /> {song.plays}</span>
-//                   <span><FontAwesomeIcon icon={faHeart} /> {song.likes}</span>
-//                 </div>
-//               </div>
-//             </div>
-//           )
-//         }) : console.log(!topFiveSongsByPlays)}
-//       </div>
-//     )
-//   }
-// }
-
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faHeart, faComment } from "@fortawesome/free-solid-svg-icons";
@@ -90,7 +49,7 @@ export default function TopFiveSongsByPlays() {
 
   return (
     <div className="song-card-container">
-      {likes.map((like, index) => (
+      {likes.map((like) => (
         <div className="song-card" key={like.id}>
           <div>
             <img

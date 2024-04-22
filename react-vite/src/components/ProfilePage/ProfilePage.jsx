@@ -1,15 +1,13 @@
-import { deleteUserThunk, getUserThunk } from '../../redux/profilePage'
+import { deleteUserThunk } from '../../redux/profilePage'
 import { AllSongsByUser } from '../SongSorts'
 import * as sessionActions from '../../redux/session'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useEffect } from 'react'
 import { useModal } from '../../context/Modal'
 import { useDispatch, useSelector } from 'react-redux'
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import ProfileUpdate from './EditProfileModal'
 import CreateSong from '../SongPage/SongForm'
 import './ProfilePage.css'
-import { getSongsThunk } from '../../redux/song'
 
 const UserPage = () => {
     const dispatch = useDispatch()

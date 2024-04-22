@@ -1,17 +1,10 @@
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getSongThunk } from "../../redux/song";
-import { useEffect, useState } from "react";
-import { FeaturedSong } from "../SongSorts";
-import "./SongPage.css";
-import { useSelector } from "react-redux";
 // import { useParams } from "react-router-dom";
 // import { getSongThunk } from "../../redux/song";
-// import {  useState } from "react";
-import { FeaturedSong } from "../SongSorts"
-import "./SongPage.css"
+// import { useEffect, useState } from "react";
+import { FeaturedSong } from "../SongSorts";
+import "./SongPage.css";
 import SongById from "../SongSorts/SongById";
-// import { loadSongCommentsThunk } from "../../redux/comment";
 import PlaylistPage from "../PlaylistPage";
 import { CommentsForSong } from "../Comments";
 

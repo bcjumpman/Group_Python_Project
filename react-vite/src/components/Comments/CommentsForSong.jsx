@@ -73,8 +73,8 @@ export default function CommentsForSong() {
 
   return (
     <div>
-      <form onSubmit={isEdit ? handleEditSubmit : handleSubmit} action="">
-        <textarea value={newComment} onChange={(e) => setNewComment(e.target.value)} name="new-comment" id="new-comment" cols="100" rows="4" placeholder="Enter new comment"></textarea>
+      <form className="song-form" onSubmit={isEdit ? handleEditSubmit : handleSubmit} action="">
+        <textarea value={newComment} onChange={(e) => setNewComment(e.target.value)} name="new-comment" id="new-comment" placeholder="Enter new comment"></textarea>
 
         {isEdit ?
           <div>

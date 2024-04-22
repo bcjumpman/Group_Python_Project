@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faHeart, faComment } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
@@ -27,7 +27,12 @@ export default function FeaturedSong() {
     }
   }, [allSongs, userLikes]);
 
-  const handleLike = (songId) => {
+  const song = allSongs[Math.floor(Math.random() * allSongs.length)]
+
+  const handleLike = (e, songId) => {
+    e.preventDefault()
+    // e.stopPropagation()
+
     if (!randomSong) return;
 
     if (isLiked) {
@@ -43,28 +48,26 @@ export default function FeaturedSong() {
   if (!randomSong) {
     return <div>Loading song or no song available...</div>;
   }
-    return (
-      <>
-      <div className="song-card-container">
-        <div className='song-card'>
-          <div>
-            <img className="song-card-cover-art" src={song.cover_art} alt="cover art for song" />
+
+  return (
+    <div className="song-card-container">
+      <div className='song-card'>
+        <div>
+          <img className="song-card-cover-art" src={song.cover_art} alt="cover art for song" />
+        </div>
+        <div className='song-card-data'>
+          <div className='song-card-headers'>
+            <Link to={`/songs/${song.id}`}><h4>{song.name}</h4></Link>
+            <span className='song-card-artist'>Uploaded by {song.artist}</span>
           </div>
-          <div className='song-card-data'>
-            <div className='song-card-headers'>
-              <Link to={`/songs/${song.id}`}><h4>{song.name}</h4></Link>
-              <span className='song-card-artist'>Uploaded by {song.artist}</span>
-            </div>
-            <div className='song-card-icon-stats'>
-              <span><FontAwesomeIcon icon={faComment} /> {song.comments}</span>
-              <span><FontAwesomeIcon icon={faPlay} /> {song.plays}</span>
-              <span onClick={handleClick}>
-              <FontAwesomeIcon icon={faHeart} /> {likeCount}</span>
-            </div>
+          <div className='song-card-icon-stats'>
+            <span><FontAwesomeIcon icon={faComment} /> {song.comments}</span>
+            <span><FontAwesomeIcon icon={faPlay} /> {song.plays}</span>
+            <span onClick={(e) => handleLike(e)}>
+            <FontAwesomeIcon icon={faHeart} /> {likeCount}</span>
           </div>
         </div>
       </div>
     </div>
-  </>
   )
 }

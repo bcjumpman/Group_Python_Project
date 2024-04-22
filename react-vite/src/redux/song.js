@@ -83,7 +83,7 @@ export const getUserSongsThunk = (userId) => async (dispatch) => {
   const res = await fetch(`/api/users/${userId}/songs`);
   if (res.ok) {
     const songs = await res.json();
-    // await dispatch(loadUserSongs(songs));
+    await dispatch(loadUserSongs(songs));
     return songs;
   } else return res;
 };
