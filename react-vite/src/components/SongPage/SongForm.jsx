@@ -96,7 +96,7 @@ const CreateSong = () => {
                         />
                     </label>
                     {errors.name && <p className="err-msg">{errors.name}</p>}
-                    <label className="spot-label">
+                    <label className="upload-label">
                         Link to Song
                         <input
                             type="file"
@@ -108,7 +108,7 @@ const CreateSong = () => {
                         />
                     </label>
                     {errors.songUrl && <p className="err-msg">{errors.songUrl}</p>}
-                    <label className="spot-label">
+                    <label className="upload-label">
                         Link to Cover Art
                         <input
                             type="file"
@@ -152,8 +152,10 @@ const CreateSong = () => {
                     </div>
                     {errors.isPrivate && <p className="err-msg">{errors.isPrivate}</p>}
                 </div>
-                <button id="submit-button" type="submit">Create Song</button>
-                <button id="cancel-button" type="button" onClick={closeModal}>Cancel</button>
+                <div id="button-contain">
+                    <button id="submit-button" type="submit">Create Song</button>
+                    <button id="cancel-button" type="button" onClick={closeModal}>Cancel</button>
+                </div>
             </form>
         </div>
     )

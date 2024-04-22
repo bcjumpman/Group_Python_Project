@@ -1,0 +1,52 @@
+.profile-contain {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; Center items horizontally */
+    margin: 0;
+    padding: 0;
+}
+
+#prof-info {
+    display: flex;
+    justify-content: center;
+}
+
+#prof-stuff, #artist-stuff {
+    border: 3px solid black;
+    width: fit-content;
+    margin: 5px;
+    padding: 5px;
+}
+
+.prof-piece, .artist-piece {
+    font-size: larger;
+    font-weight: bolder;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+.prof-piece, .info, .artist-piece, .artist-info {
+    /* text-align: center; */
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+.info, .artist-info {
+    font-size: small;
+    white-space: nowrap;
+    text-align: right;
+}
+
+button {
+    /* display: flex; */
+    border-radius: 4px;
+    color: yellow;
+    background-color: silver;
+    font-size: 1em;
+    margin: 3px;
+    padding: 3px;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+}

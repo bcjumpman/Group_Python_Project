@@ -97,7 +97,6 @@ export const getSongThunk = (songId) => async (dispatch) => {
   }
 };
 
-
 export const createSongThunk = (data) => async (dispatch) => {
   console.log('2 ----->>>>', data.get('song_url'))
   const res = await fetch("/api/songs/new", {
@@ -200,8 +199,8 @@ export default function songReducer(state = initialState, action) {
     case EDIT_SONG: //Edit song
       return { ...state, singleSong: action.song };
     case DELETE_SONG: //Delete song
-      newState.allSongs = { ...state.allSongs };
-      delete newState.allSongs[action.songId];
+      newState.singleSong = { ...state.singleSong };
+      delete newState.singleSong[action.songId];
       return newState;
 
     case ADD_LIKE: {
