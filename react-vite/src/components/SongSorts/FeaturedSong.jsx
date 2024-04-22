@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faHeart, faComment } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import { Link } from 'react-router-dom'
 import "./SongSorts.css"
 
 
