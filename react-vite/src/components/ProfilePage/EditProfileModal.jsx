@@ -87,11 +87,11 @@ const ProfileUpdate = () => {
         if (submit && !firstName) validErrs.firstName = "First name is required"
         if (submit && !lastName) validErrs.lastName = "Last name is required"
         if (submit && !email) validErrs.email = "Email is required"
-        if (submit && !isArtist) validErrs.isArtist = "Please select true or false"
         if (submit && !username) validErrs.username = "Username is required"
+        if (submit && !isArtist) validErrs.isArtist = "Please select true or false"
         if (submit && !artistName) validErrs.artistName = "Name of artist is required"
         setErrors(validErrs)
-    }, [firstName, lastName, email, username, artistName, submit])
+    }, [firstName, lastName, email, username, isArtist, artistName, submit])
 
     return (
         <div id="form-modal-contain">

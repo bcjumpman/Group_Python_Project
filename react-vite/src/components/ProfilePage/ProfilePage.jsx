@@ -1,5 +1,4 @@
 import { deleteUserThunk, getUserThunk } from '../../redux/profilePage'
-import { deleteCommentThunk } from '../../redux/comment'
 import { AllSongsByUser } from '../SongSorts'
 import * as sessionActions from '../../redux/session'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -27,10 +26,6 @@ const UserPage = () => {
 
     let user = useSelector(state => state.session.user ? state.session.user : null)
 
-    const handleUpdateComment = userId => {
-        navigate(`/users/${userId}/edit`)
-    }
-
     // const song = Object.values(songObj).filter(song => song.userId === parseInt(userId))
     // const comments = Object.values(commentObj).filter(comment => comment.userId === parseInt(userId))
 
@@ -46,11 +41,6 @@ const UserPage = () => {
             navigate('/')
             closeModal()
         }
-    }
-
-    const handleDeleteComment = userId => {
-        dispatch(deleteCommentThunk(userId))
-        closeModal()
     }
 
     return (
@@ -105,28 +95,6 @@ const UserPage = () => {
                                 modalComponent={<CreateSong />}
                             />
                         </> : null}
-                </div>
-            </section>
-            <section className='comments-contain'>
-                <div id='user-comments'>
-                    {/* {comments.map(comment => { */}
-                    {/* // parts of code from single song page #Comments */}
-                    <div className='edit-or-delete'>
-                        <button className='update-btn' type='button' onClick={() => handleUpdateComment(user.id)}>Edit Comment</button>
-                        <OpenModalMenuItem
-                            itemText='Delete Comment'
-                            className='delete-button'
-                            modalComponent={(
-                                <div id='confirm-delete'>
-                                    <h2>Confirm Delete</h2>
-                                    <span>Are you sure you want to remove this comment?</span>
-                                    <button id='delete-complete' type='button' onClick={() => handleDeleteComment(user.id)}>Yes (Delete Comment)</button>
-                                    <button id='delete-cancel' type='button' onClick={closeModal}>No (Keep Comment)</button>
-                                </div>
-                            )}
-                        />
-                    </div>
-                    {/* })} */}
                 </div>
             </section>
             <section className='button-contain'>

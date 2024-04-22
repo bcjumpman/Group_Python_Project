@@ -46,7 +46,7 @@ button {
     font-size: 1em;
     margin: 3px;
     padding: 3px;
-    width: fit-content;
+    width: 175px;
     justify-content: center;
     align-items: center;
 }

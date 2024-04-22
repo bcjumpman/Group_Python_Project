@@ -2,24 +2,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faHeart, faComment } from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom'
-import { useState } from 'react';
+// import { useState } from 'react';
 import "./SongSorts.css"
 
-export default function TopSongByMostActivity(){
+export default function TopSongByMostActivity() {
   let allSongs = useSelector((state) => state.song.allSongs.songs);
 
-  if(allSongs === undefined){
+  if (allSongs === undefined) {
     return
   } else {
-    const allSongsByActivity = allSongs.sort((b, a) => (a.plays + a.likes)  - (b.plays + b.lines))
-    const topSongByMostActivity = allSongsByActivity.slice(0,1)
+    const allSongsByActivity = allSongs.sort((b, a) => (a.plays + a.likes) - (b.plays + b.lines))
+    const topSongByMostActivity = allSongsByActivity.slice(0, 1)
     return (
       <div className="song-card-container">
         {topSongByMostActivity ? topSongByMostActivity.map((song) => {
-          return(
+          return (
             <div className='song-card' key={song.id}>
               <div>
-              <img className="song-card-cover-art" src={song.cover_art} alt="cover art for song" />
+                <img className="song-card-cover-art" src={song.cover_art} alt="cover art for song" />
               </div>
               <div className='song-card-data'>
                 <div className='song-card-headers'>

@@ -111,6 +111,7 @@
   height: 30px;
   position: static;
   display: inline-block;
+  width: 50px;
 }
 
 #nav-link {

@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import './PlaylistPage.css'
 
-export default function PlaylistPage({props}){
+export default function PlaylistPage() {
   const user = useSelector(state => state.session.user)
 
   return (

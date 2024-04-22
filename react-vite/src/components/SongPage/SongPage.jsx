@@ -1,20 +1,20 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getSongThunk } from "../../redux/song";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+// import { useParams } from "react-router-dom";
+// import { getSongThunk } from "../../redux/song";
+// import {  useState } from "react";
 import { FeaturedSong } from "../SongSorts"
 import "./SongPage.css"
 import SongById from "../SongSorts/SongById";
-import { loadSongCommentsThunk } from "../../redux/comment";
+// import { loadSongCommentsThunk } from "../../redux/comment";
 import PlaylistPage from "../PlaylistPage";
 import { CommentsForSong } from "../Comments";
 
-export default function SongPage(){
-  const { id } = useParams()
-  const dispatch = useDispatch()
-  const [rerender, setRerender] = useState(false)
+export default function SongPage() {
+  // const { id } = useParams()
+  // const dispatch = useDispatch()
+  // const [rerender, setRerender] = useState(false)
 
-  const song = useSelector(state =>state.song.singleSong.song)
+  const song = useSelector(state => state.song.singleSong.song)
 
   return (
     <div className='page-container discover'>
@@ -30,7 +30,7 @@ export default function SongPage(){
         </div>
         <span className='h-breaker'></span>
         <h2>Comments</h2>
-        <div className="comments-section">
+        <div className="comments-container">
           <div className="current-comments">
             {song ? <CommentsForSong /> : null}
           </div>

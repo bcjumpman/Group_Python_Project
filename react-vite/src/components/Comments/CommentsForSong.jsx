@@ -3,8 +3,9 @@ import { useParams } from "react-router-dom"
 import { getSongThunk } from "../../redux/song"
 import { createCommentThunk, deleteCommentThunk, editCommentThunk } from "../../redux/comment"
 import { useState } from "react"
+import "./Comments.css"
 
-export default function CommentsForSong(){
+export default function CommentsForSong() {
   const { id } = useParams()
   const dispatch = useDispatch()
   const [newComment, setNewComment] = useState()
@@ -14,9 +15,9 @@ export default function CommentsForSong(){
   const songComments = useSelector(state => state.song.singleSong.song.comments)
   let data = {}
 
-  if(!songComments) return dispatch(getSongThunk(id))
+  if (!songComments) return dispatch(getSongThunk(id))
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     data = {
@@ -29,7 +30,7 @@ export default function CommentsForSong(){
     dispatch(getSongThunk(id))
   }
 
-  const handleEditSubmit = async(e) => {
+  const handleEditSubmit = async (e) => {
     e.preventDefault()
 
     data = {
@@ -45,22 +46,22 @@ export default function CommentsForSong(){
     dispatch(getSongThunk(id))
   }
 
-  const handleEdit = async(e, comment) => {
+  const handleEdit = async (e, comment) => {
     e.preventDefault()
 
-    if(isEdit){
+    if (isEdit) {
       data = comment
       setCurrComment('')
       setNewComment('')
       setIsEdit(!isEdit)
-    } else if(!isEdit) {
+    } else if (!isEdit) {
       setNewComment(comment.body)
       setCurrComment(comment)
       setIsEdit(!isEdit)
     }
   }
 
-  const handleDelete = async(e, comment) => {
+  const handleDelete = async (e, comment) => {
     e.preventDefault()
 
     setIsEdit(false)
@@ -72,25 +73,25 @@ export default function CommentsForSong(){
 
   return (
     <div>
-      <form onSubmit={isEdit? handleEditSubmit : handleSubmit} action="">
+      <form onSubmit={isEdit ? handleEditSubmit : handleSubmit} action="">
         <textarea value={newComment} onChange={(e) => setNewComment(e.target.value)} name="new-comment" id="new-comment" cols="100" rows="4" placeholder="Enter new comment"></textarea>
 
-        {isEdit?
-        <div>
-          <button>Update Comment</button>
-          <button onClick={(e)=> handleEdit(e)}>Cancel</button>
+        {isEdit ?
+          <div>
+            <button>Update Comment</button>
+            <button onClick={(e) => handleEdit(e)}>Cancel</button>
           </div> : <button>Leave Comment</button>}
       </form>
       <ul className="comments-section">
-        {songComments.length? songComments.map((comment)=>
+        {songComments.length ? songComments.map((comment) =>
           <li key={comment.id}>{comment.body}
             {comment.user_id === user_id ?
-            <div>
-              <button onClick={(e)=> handleEdit(e, comment)}>edit</button>
-              <button onClick={(e)=> handleDelete(e, comment)}>delete</button>
-            </div> : null }
+              <div>
+                <button onClick={(e) => handleEdit(e, comment)}>edit</button>
+                <button onClick={(e) => handleDelete(e, comment)}>delete</button>
+              </div> : null}
             {console.log(comment.user_id, user_id)}
-          </li>): <h4>No Comments</h4>}
+          </li>) : <h4>No Comments</h4>}
       </ul>
     </div>
   )

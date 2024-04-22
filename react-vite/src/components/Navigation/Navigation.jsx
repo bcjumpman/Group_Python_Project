@@ -48,7 +48,7 @@ function Navigation({ isLoaded }) {
         {isLoaded && sessionLinks}
       </ul>
       <Outlet />
-      {/* <SongPlayer /> */}
+      <SongPlayer />
     </>
   );
 }
