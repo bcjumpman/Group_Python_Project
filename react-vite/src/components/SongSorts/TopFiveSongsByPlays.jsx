@@ -23,7 +23,7 @@ export default function TopFiveSongsByPlays(){
               </div>
               <div className='song-card-data'>
                 <div className='song-card-headers'>
-                <Link to={`/songs/${song.id}`}><h4>{song.name}</h4></Link>
+                  <Link to={`/songs/${song.id}`}><h4>{song.name}</h4></Link>
                   <span className='song-card-artist'>Uploaded by {song.artist}</span>
                 </div>
                 <div className='song-card-icon-stats'>

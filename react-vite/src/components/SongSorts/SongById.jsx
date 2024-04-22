@@ -1,19 +1,22 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faHeart, faComment } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
-import { useSelector } from "react-redux";
-
-
+import { getSongThunk } from '../../redux/song';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import "./SongSorts.css"
+import { loadSongCommentsThunk } from '../../redux/comment';
 
 
-export default function FeaturedSong(){
-  let allSongs = useSelector((state) => state.song.allSongs.songs);
+export default function SongById({ props }){
+  const dispatch = useDispatch()
+  const song = props.song
 
-  if(allSongs === undefined){
-    return
+  // dispatch(getSongThunk(props.song.id))
+
+  if(song === undefined){
+    return <h2>Can&apos;t find song with id of {song.id}</h2>
   } else {
-    const song = allSongs[Math.floor(Math.random() * allSongs.length)]
     return (
       <div className="song-card-container">
         <div className='song-card'>

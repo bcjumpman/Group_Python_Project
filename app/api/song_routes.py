@@ -42,7 +42,7 @@ def post_song(songForm):
 # Get all songs with like
 @song_routes.route('/')
 def getAllSongs():
-  songs = db.session.query(Song).join(Like, Song.id == Like.song_id).join(User, Song.user_id == User.id).join(Comment, Comment.song_id == Song.id).all()
+  songs = db.session.query(Song).join(Like).join(User).all()
 
   all_songs = []
 
@@ -53,6 +53,7 @@ def getAllSongs():
     per_song['comments'] = len(song.comments)
     all_songs.append(per_song)
 
+  print(len(all_songs))
   return jsonify({'songs': all_songs})
 
 #Upload a song
