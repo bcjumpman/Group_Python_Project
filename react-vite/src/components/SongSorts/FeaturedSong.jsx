@@ -68,6 +68,7 @@ export default function FeaturedSong() {
           </div>
         </div>
       </div>
+      </>
     </div>
   )
 }
