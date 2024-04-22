@@ -30,7 +30,6 @@ function LoginFormModal() {
       closeModal();
       navigate('/discover')
     }
-
   };
 
   const disabledButton = () => {

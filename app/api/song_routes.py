@@ -23,7 +23,7 @@ def post_song(songForm):
 
     user = User.query.get(current_user.id)
     new_song = Song(
-        # user = user,
+        user = user,
         name = songForm.data["name"],
         genre = songForm.data["genre"],
         is_private = songForm.data["is_private"],
@@ -33,7 +33,6 @@ def post_song(songForm):
         song_url = upload_song['url'],
         cover_art = upload_pic['url']
     )
-
     db.session.add(new_song)
     db.session.commit()
     return new_song
@@ -57,16 +56,16 @@ def getAllSongs():
 
 #Upload a song
 @song_routes.route('/', methods=["POST"])
-@login_required
 def post_song_route():
-    form = SongForm()
+  form = SongForm()
+  print(form.data)
+  form['csrf_token'].data = request.cookies['csrf_token']
 
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-      new_song = post_song(form)
-      return new_song.to_dict()
+  if form.validate_on_submit():
+    new_song = post_song(form)
+    return new_song.to_dict()
 
-    return {"errors": form.errors}, 401
+  return {"errors": form.errors}, 401
 
 
 # Get song by id

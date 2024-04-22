@@ -93,11 +93,16 @@ export const getSongThunk = (songId) => async (dispatch) => {
     return song;
   }
 };
+
+
 export const createSongThunk = (data) => async (dispatch) => {
+  console.log('song.js----->>>>', data)
   const res = await fetch("/api/songs", {
     method: "POST",
+    // headers: { "Content-Type": "form-data" },
     body: data,
   });
+
   if (res.ok) {
     const createdSong = await res.json();
     dispatch(createSong(createdSong));
@@ -109,6 +114,7 @@ export const createSongThunk = (data) => async (dispatch) => {
     }
   }
 };
+
 export const editSongThunk = (song, songId) => async (dispatch) => {
   const res = await fetch(`/api/songs/${songId}`, {
     method: "PUT",

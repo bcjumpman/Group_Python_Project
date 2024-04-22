@@ -25,9 +25,9 @@ const UserPage = () => {
 
     useEffect(() => {
         dispatch(getUserThunk(toInt))
-    }, [dispatch, toInt])
+       }, [dispatch, toInt])
 
-    const user = useSelector(state => state.session.user ? state.session.user : null)
+    let user = useSelector(state => state.session.user ? state.session.user : null)
 
     const handleUpdateComment = userId => {
         navigate(`/users/${userId}/edit`)

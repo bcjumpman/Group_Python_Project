@@ -55,15 +55,17 @@ const CreateSong = () => {
             song_url: songUrl,
             cover_art: coverArt,
             genre,
-            is_private: isPrivate
+            is_private: isPrivate,
         }
         const newSong = await dispatch(createSongThunk(song))
-        console.log(newSong)
 
         if (newSong && newSong.id) {
             navigate(`/songs/${newSong.id}`)
             closeModal()
-        } else setErrors({ ...newSong.errors, ...errors })
+        } else {
+            setErrors({ ...errors })
+        }
+        // ...newSong.errors,
 
     }
     useEffect(() => {
@@ -95,7 +97,9 @@ const CreateSong = () => {
                     <label className="spot-label">
                         Link to Song
                         <input
-                            type="text"
+                            type="file"
+                            label='Upload song'
+                            // buttonAfter={uploadFileButton}
                             value={songUrl}
                             onChange={(e) => setSongUrl(e.target.value)}
                         />
@@ -104,7 +108,9 @@ const CreateSong = () => {
                     <label className="spot-label">
                         Link to Cover Art
                         <input
-                            type="text"
+                            type="file"
+                            label='Upload coverart'
+                            // buttonAfter={uploadFileButton}
                             value={coverArt}
                             onChange={(e) => setCoverArt(e.target.value)}
                         />

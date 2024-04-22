@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { Navigate, useParams, useNavigate } from "react-router-dom"
 import { editUserThunk } from "../../redux/profilePage"
 import { useModal } from "../../context/Modal"
 import './EditProfileModal.css'
@@ -8,18 +8,21 @@ import './EditProfileModal.css'
 const ProfileUpdate = () => {
     const { userId } = useParams()
     const dispatch = useDispatch()
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     const { closeModal } = useModal();
     const user = useSelector(state => state.session.user ? state.session.user : null)
-    const currUser = useSelector(state => state.user[userId])
+    const currUser = useSelector(state => state.user.userProfile)
 
-    const [firstName, setFirstName] = useState(currUser?.firstName || "")
-    const [lastName, setLastName] = useState(currUser?.lastName || "")
+    console.log(currUser)
+
+    const [firstName, setFirstName] = useState(currUser?.first_name || "")
+    const [lastName, setLastName] = useState(currUser?.last_name || "")
     const [email, setEmail] = useState(currUser?.email || "")
     const [username, setUsername] = useState(currUser?.username || "")
-    const [artistName, setArtistName] = useState(currUser?.artistName || "")
-    const [artistCountry, setArtistCountry] = useState(currUser?.artistCountry || "")
-    const [artistBio, setArtistBio] = useState(currUser?.artistBio || "")
+    const [isArtist, setIsArtist] = useState(currUser?.is_artist || false)
+    const [artistName, setArtistName] = useState(currUser?.artist_name || "")
+    const [artistCountry, setArtistCountry] = useState(currUser?.artist_country || "")
+    const [artistBio, setArtistBio] = useState(currUser?.artist_bio || "")
     const [errors, setErrors] = useState({})
     const [submit, setSubmit] = useState(false)
 
@@ -59,7 +62,9 @@ const ProfileUpdate = () => {
             last_name: lastName,
             email,
             username,
+            is_artist: isArtist
         }
+
         if (user.is_artist) {
             userData = {
                 ...userData,
@@ -82,6 +87,7 @@ const ProfileUpdate = () => {
         if (submit && !firstName) validErrs.firstName = "First name is required"
         if (submit && !lastName) validErrs.lastName = "Last name is required"
         if (submit && !email) validErrs.email = "Email is required"
+        if (submit && !isArtist) validErrs.isArtist = "Please select true or false"
         if (submit && !username) validErrs.username = "Username is required"
         if (submit && !artistName) validErrs.artistName = "Name of artist is required"
         setErrors(validErrs)
@@ -132,6 +138,28 @@ const ProfileUpdate = () => {
                         />
                     </label>
                     {errors.username && <p className="err-msg">{errors.username}</p>}
+                    <div className="pub-or-priv">
+                        <span>Artist: </span>
+                        <label>
+                            True
+                            <input
+                                type="radio"
+                                value="true"
+                                checked={isArtist === true}
+                                onChange={() => setIsArtist("true")}
+                            />
+                        </label>
+                        <label>
+                            False
+                            <input
+                                type="radio"
+                                value="false"
+                                checked={isArtist === false}
+                                onChange={() => setIsArtist("false")}
+                            />
+                        </label>
+                    </div>
+                    {errors.isArtist && <p className="err-msg">{errors.isArtist}</p>}
                     {user.is_artist && (
                         <>
                             <label className="user-label">
