@@ -1,8 +1,8 @@
-const GET_SONG_COMMENTS = "songs/GET_SONG_COMMENTS";
-const GET_USER_COMMENT = "songs/GET_SONG_COMMENT";
-const CREATE_COMMENT = "songs/CREATE_SONG";
-const EDIT_COMMENT = "songs/EDIT_SONG";
-const DELETE_COMMENT = "songs/DELETE_SONG";
+const GET_SONG_COMMENTS = "comments/GET_SONG_COMMENTS";
+const GET_USER_COMMENT = "comments/GET_SONG_COMMENT";
+const CREATE_COMMENT = "comments/CREATE_COMMENT";
+const EDIT_COMMENT = "comments/EDIT_COMMENT";
+const DELETE_COMMENT = "comments/DELETE_COMMENT";
 
 const loadSongComments = (comments) => {
   return {

@@ -6,7 +6,7 @@ export const useSongContext = () => useContext(SongContext);
 
 export default function SongPlayerContext({ children }) {
   const [songs, setSongs] = useState([]);
-  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  // const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [prevSongs, setPrevSongs] = useState([]);
   const [songTime, setSongTime] = useState(0);
 
@@ -14,7 +14,7 @@ export default function SongPlayerContext({ children }) {
     if (songs.length) {
       sessionStorage.setItem("songs", JSON.stringify(songs));
     }
-  }, [songs]);
+  }, [songs, prevSongs, songTime]);
 
   useEffect(() => {
     if (prevSongs.length) {
@@ -61,8 +61,7 @@ export default function SongPlayerContext({ children }) {
     <SongContext.Provider
       value={{
         songs,
-        currentSongIndex,
-        setCurrentSongIndex,
+        setSongs,
         prevSongs,
         setPrevSongs,
         songTime,

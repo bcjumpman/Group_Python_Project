@@ -36,12 +36,12 @@ export const router = createBrowserRouter([
             element: <SongPage />,
           },
           {
-            path: "profile/:id",
+            path: "users/:userId",
             element: <UserPage />,
           },
           {
             path: "*",
-            element: <h1>USER NOT FOUND</h1>,
+            element: <h1>PAGE NOT FOUND</h1>,
           },
         ],
       },

@@ -43,7 +43,7 @@ function ProfileButton() {
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : "hidden")
-  const profURL = `/profile/${user.id}`
+  const profURL = `/users/${user.id}`
 
   return (
     <>
@@ -54,14 +54,12 @@ function ProfileButton() {
         <ul className={ulClassName} ref={ulRef}>
           {user ? (
             <div id="profile-popup">
-              <li className='menu-content'>
+              <ul className='menu-content'>
                 <li>{user.username}</li>
                 <li>{user.email}</li>
                 <NavLink id="to-profile" to={profURL}>Manage Profile</NavLink>
-                <li>
-                  <button id="logout" onClick={logout}>Log Out</button>
-                </li>
-              </li>
+                <button id="logout" onClick={logout}>Log Out</button>
+              </ul>
             </div>
           ) : (
             <div id='popup'>

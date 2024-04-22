@@ -1,21 +1,22 @@
-import { getUserThunk } from '../../redux/profilePage'
-// import { getUserSongsThunk, createSongThunk, editSongThunk, deleteSongThunk } from '../../redux/song'
-// import { loadUserCommentsThunk, editCommentThunk, deleteCommentThunk } from '../../redux/comment'
+import { deleteUserThunk, getUserThunk } from '../../redux/profilePage'
 import { deleteSongThunk } from '../../redux/song'
 import { deleteCommentThunk } from '../../redux/comment'
 import { AllSongsByUser } from '../SongSorts'
 import * as sessionActions from '../../redux/session'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useModal } from '../../context/Modal'
 import { useDispatch, useSelector } from 'react-redux'
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem'
 import ProfileUpdate from './EditProfileModal'
+import CreateSong from '../SongPage/SongForm'
+import SongUpdate from '../SongPage/EditSong'
 import './ProfilePage.css'
 
 const UserPage = () => {
     const dispatch = useDispatch()
-    // const { userId } = useParams()
+    const { userId } = useParams()
+    const toInt = parseInt(userId)
     const navigate = useNavigate()
     const { closeModal } = useModal()
     // const sessionObj = useSelector(state => state.session.user)
@@ -23,17 +24,13 @@ const UserPage = () => {
     // const commentObj = useSelector(state => state.comment)
 
     useEffect(() => {
-        dispatch(getUserThunk())
-    }, [dispatch])
+        dispatch(getUserThunk(toInt))
+       }, [dispatch, toInt])
 
-    const user = useSelector(state => state.session.user ? state.session.user : null)
+    let user = useSelector(state => state.session.user ? state.session.user : null)
 
-    const handleUpdateSong = user => {
-        navigate(`/profile/${user.id}/edit`)
-    }
-
-    const handleUpdateComment = user => {
-        navigate(`/profile/${user.id}/edit`)
+    const handleUpdateComment = userId => {
+        navigate(`/users/${userId}/edit`)
     }
 
     // const songs = Object.values(songObj).filter(song => song.userId === parseInt(userId))
@@ -45,18 +42,21 @@ const UserPage = () => {
         navigate('/')
     }
 
-    const handleDeleteProfile = user => {
-        dispatch(sessionActions.removeUser(user.id))
+    const handleDeleteProfile = toInt => {
+        const deletedUser = dispatch(deleteUserThunk(toInt));
+        if (deletedUser) {
+            navigate('/')
+            closeModal()
+        }
+    }
+
+    const handleDeleteSong = toInt => {
+        dispatch(deleteSongThunk(toInt))
         closeModal()
     }
 
-    const handleDeleteSong = user => {
-        dispatch(deleteSongThunk(user.id))
-        closeModal()
-    }
-
-    const handleDeleteComment = user => {
-        dispatch(deleteCommentThunk(user.id))
+    const handleDeleteComment = userId => {
+        dispatch(deleteCommentThunk(userId))
         closeModal()
     }
 
@@ -79,7 +79,7 @@ const UserPage = () => {
                         itemText='Edit Profile'
                         className='edit-button'
                         modalComponent={(
-                            <ProfileUpdate />
+                            <ProfileUpdate toInt={toInt} />
                         )} />
                     {/* <button className='update-btn' type='button' onClick={() => handleUpdateProfile(user.id)}>Edit Profile</button> */}
                 </div>
@@ -89,8 +89,17 @@ const UserPage = () => {
                     {user.is_artist ?
                         <>
                             <AllSongsByUser />
+                            <OpenModalMenuItem
+                                itemText='New Song'
+                                className='create-button'
+                                modalComponent={<CreateSong />}
+                            />
                             <div className='edit-or-delete'>
-                                <button className='update-btn' type='button' onClick={() => handleUpdateSong(user.id)}>Update Song</button>
+                                <OpenModalMenuItem
+                                    itemText='Edit Song'
+                                    className='edit-button'
+                                    modalComponent={<SongUpdate />}
+                                />
                                 <OpenModalMenuItem
                                     itemText='Delete'
                                     className='delete-button'
