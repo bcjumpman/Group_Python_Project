@@ -35,3 +35,11 @@ margin: 0 auto;
   margin-left: 20px;
   border-left: 1px solid #ac90cc;
 }
+
+button:hover {
+  cursor: pointer;
+}
+
+.error-message, .err-msg {
+  color: red;
+}

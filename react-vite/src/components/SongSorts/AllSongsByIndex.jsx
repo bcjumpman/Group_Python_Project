@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faHeart, faComment } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import "./SongSorts.css"
 
@@ -19,7 +20,7 @@ export default function AllSongsByIndex(){
               </div>
               <div className='song-card-data'>
                 <div className='song-card-headers'>
-                  <h4>{song.name}</h4>
+                <Link to={`/songs/${song.id}`}><h4>{song.name}</h4></Link>
                   <span className='song-card-artist'>Uploaded by {song.artist}</span>
                 </div>
                 <div className='song-card-icon-stats'>
