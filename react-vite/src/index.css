@@ -43,3 +43,15 @@ button:hover {
 .error-message, .err-msg {
   color: red;
 }
+
+#confirm-delete {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#delete-complete, #delete-cancel {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useState, useEffect } from "react"
-import { Navigate, useParams, useNavigate } from "react-router-dom"
+import { useParams, } from "react-router-dom"
 import { editUserThunk } from "../../redux/profilePage"
 import { useModal } from "../../context/Modal"
 import './EditProfileModal.css'
@@ -8,7 +8,7 @@ import './EditProfileModal.css'
 const ProfileUpdate = () => {
     const { userId } = useParams()
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const { closeModal } = useModal();
     const user = useSelector(state => state.session.user ? state.session.user : null)
     const currUser = useSelector(state => state.user.userProfile)
@@ -183,7 +183,7 @@ const ProfileUpdate = () => {
                             </label>
                             <label className="user-label">
                                 Biography
-                                <input
+                                <textarea
                                     type="text"
                                     placeholder="Bio"
                                     value={artistBio}

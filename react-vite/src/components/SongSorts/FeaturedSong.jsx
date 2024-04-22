@@ -1,15 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faHeart, faComment } from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from "react-redux";
-
-
+import { Link } from 'react-router-dom'
 import "./SongSorts.css"
 
 
-export default function FeaturedSong(){
+export default function FeaturedSong() {
   let allSongs = useSelector((state) => state.song.allSongs.songs);
 
-  if(allSongs === undefined){
+  if (allSongs === undefined) {
     return
   } else {
     const song = allSongs[Math.floor(Math.random() * allSongs.length)]
@@ -17,11 +16,11 @@ export default function FeaturedSong(){
       <div className="song-card-container">
         <div className='song-card'>
           <div>
-          <img className="song-card-cover-art" src={song.cover_art} alt="cover art for song" />
+            <img className="song-card-cover-art" src={song.cover_art} alt="cover art for song" />
           </div>
           <div className='song-card-data'>
             <div className='song-card-headers'>
-              <h4>{song.name}</h4>
+              <Link to={`/songs/${song.id}`}><h4>{song.name}</h4></Link>
               <span className='song-card-artist'>Uploaded by {song.artist}</span>
             </div>
             <div className='song-card-icon-stats'>

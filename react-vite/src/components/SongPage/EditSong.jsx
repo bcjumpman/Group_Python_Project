@@ -13,10 +13,10 @@ const SongUpdate = () => {
     const currUser = useSelector(state => state.user[userId])
 
     const [name, setName] = useState(currUser?.name || "")
-    const [songUrl, setSongUrl] = useState(currUser?.songUrl || "")
-    const [coverArt, setCoverArt] = useState(currUser?.coverArt || "")
-    const [genre, setGenre] = useState(currUser?.genre || "")
-    const [isPrivate, setIsPrivate] = useState(currUser?.isPrivate || "")
+    const [songUrl, setSongUrl] = useState(currUser?.song_url || "")
+    const [coverArt, setCoverArt] = useState(currUser?.cover_art || "")
+    const [genre, setGenre] = useState(currUser?.genre || "Select genre")
+    const [isPrivate, setIsPrivate] = useState(currUser?.is_private || false)
     const [errors, setErrors] = useState({})
     const [submit, setSubmit] = useState(false)
 
@@ -51,7 +51,7 @@ const SongUpdate = () => {
             return err
         }
 
-        const songData = {
+        let songData = {
             name,
             song_url: songUrl,
             cover_art: coverArt,
@@ -98,7 +98,7 @@ const SongUpdate = () => {
                     <label className="user-label">
                         Song URL
                         <input
-                            type="text"
+                            type="file"
                             value={songUrl}
                             onChange={(e) => setSongUrl(e.target.value)}
                         />
@@ -107,7 +107,7 @@ const SongUpdate = () => {
                     <label className="user-label">
                         Cover Art
                         <input
-                            type="text"
+                            type="file"
                             value={coverArt}
                             onChange={(e) => setCoverArt(e.target.value)}
                         />
