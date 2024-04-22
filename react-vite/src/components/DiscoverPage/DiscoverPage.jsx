@@ -9,10 +9,13 @@ import {
 } from "../SongSorts";
 import "./DiscoverPage.css";
 import PlaylistPage from "../PlaylistPage";
+import { loadUserCommentsThunk } from "../../redux/comment";
 
 export default function DiscoverPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+
+  dispatch(getSongsThunk())
 
   useEffect(() => {
     dispatch(getSongsThunk());

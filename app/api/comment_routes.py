@@ -10,9 +10,10 @@ def getAllComments():
   return {'comments': [comment.to_dict() for comment in comments]}
 
 @comment_routes.route('/', methods=["POST"])
-def getCommentById():
+def createComment():
   data = request.get_json()
 
+  print('--------->>>>', data)
   comment = Comment(
     body = data['body'],
     song_id = data['song_id'],

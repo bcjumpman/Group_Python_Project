@@ -50,14 +50,23 @@ const CreateSong = () => {
         }
         if (Object.keys(err).length > 0) return err;
 
+        // const song = {
+        //     name,
+        //     song_url: songUrl,
+        //     cover_art: coverArt,
+        //     genre,
+        //     is_private: isPrivate,
+        // }
 
         const formData = new FormData()
-        formData.append('song_url', songUrl);
-        formData.append('name', name),
+        formData.append('name', name)
+        formData.append('song_url', songUrl)
+        formData.append('cover_art', coverArt)
+        formData.append('genre', genre)
+        formData.append('is_private', isPrivate)
         formData.append('duration', 88)
-        formData.append('cover_art', coverArt); // Corrected typo here
-        formData.append('genre', genre);
-        formData.append('is_private', isPrivate);
+
+        console.log(1, formData.get('song_url'))
 
         const newSong = await dispatch(createSongThunk(formData))
 
@@ -84,7 +93,7 @@ const CreateSong = () => {
 
     return (
         <div id="song-new">
-            <form onSubmit={handleSubmit} id='full-form' encType="multipart/form-data">
+            <form onSubmit={handleSubmit} id='full-form'>
                 <h2>Create a New Song</h2>
                 <div>
                     <label className="spot-label">
@@ -102,9 +111,8 @@ const CreateSong = () => {
                             type="file"
                             label='Upload song'
                             // buttonAfter={uploadFileButton}
-                            accept='audio/*'
-
-                            onChange={(e) => setSongUrl(e.target.files[0])}
+                            value={songUrl}
+                            onChange={(e) => setSongUrl(e.target.value)}
                         />
                     </label>
                     {errors.songUrl && <p className="err-msg">{errors.songUrl}</p>}
@@ -113,10 +121,9 @@ const CreateSong = () => {
                         <input
                             type="file"
                             label='Upload coverart'
-                            accept='image/*'
                             // buttonAfter={uploadFileButton}
-
-                            onChange={(e) => setCoverArt(e.target.files[0])}
+                            value={coverArt}
+                            onChange={(e) => setCoverArt(e.target.value)}
                         />
                     </label>
                     {errors.coverArt && <p className="err-msg">{errors.coverArt}</p>}

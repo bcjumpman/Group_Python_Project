@@ -2,8 +2,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faHeart, faComment } from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom'
+import { useState } from 'react';
 import "./SongSorts.css"
-
 
 export default function TopSongByMostActivity(){
   let allSongs = useSelector((state) => state.song.allSongs.songs);
