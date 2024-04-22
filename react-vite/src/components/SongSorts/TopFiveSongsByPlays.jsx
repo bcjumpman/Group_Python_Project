@@ -52,7 +52,7 @@ export default function TopFiveSongsByPlays() {
   const allSongs = useSelector((state) => state.song.allSongs.songs);
   const userLikes = useSelector((state) => state.song.userLikedSongs);
   const currentUserId = useSelector((state) => state.session.user.id);
-  const [likes, setLikes] = useState([]); // Initialize here at the top level
+  const [likes, setLikes] = useState([]);
 
   useEffect(() => {
     if (allSongs.length > 0) {
@@ -64,12 +64,12 @@ export default function TopFiveSongsByPlays() {
         isLiked: userLikes[song.id],
         likeCount: song.likes,
       }));
-      setLikes(likesData); // Set likes data based on sorted and sliced songs
+      setLikes(likesData);
     }
-  }, [allSongs, userLikes]); // Dependency array to only rerun when allSongs or userLikes changes
+  }, [allSongs, userLikes]);
 
   if (allSongs.length === 0) {
-    return <div>Loading songs...</div>; // Handle loading state
+    return <div>Loading songs...</div>;
   }
 
   const handleClick = (songId) => {

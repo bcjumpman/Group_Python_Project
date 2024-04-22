@@ -55,8 +55,8 @@ function ProfileButton() {
           {user ? (
             <div id="profile-popup">
               <ul className='menu-content'>
-                <li>{user.username}</li>
-                <li>{user.email}</li>
+                {user.username} <br />
+                {user.email} <br />
                 <NavLink id="to-profile" to={profURL}>Manage Profile</NavLink>
                 <button id="logout" onClick={logout}>Log Out</button>
               </ul>

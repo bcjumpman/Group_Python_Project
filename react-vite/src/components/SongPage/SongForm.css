@@ -1,0 +1,76 @@
+#full-formform {
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#full-form > h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.spot-label, .upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.spot-label, .upload-label label {
+    margin-top: 5px;
+}
+
+.upload-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.pub-or-priv {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.pub-or-priv label {
+    margin: 0 10px;
+}
+
+.text {
+    width: 25rem;
+    margin: 5px 20px;
+    background-color: #D4D4D4;
+}
+
+.textarea {
+    width: 25rem;
+    margin: 5px 20px;
+    background-color: #D4D4D4;
+    text-align: center;
+    resize: both;
+}
+
+.errorMessage {
+    color: red;
+}
+
+#button-contain {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 20px;
+}
+
+#submit, #cancel {
+    align-items: center;
+    padding: 5px 10px;
+    width: auto;
+    height: auto;
+    margin: 10px;;
+}

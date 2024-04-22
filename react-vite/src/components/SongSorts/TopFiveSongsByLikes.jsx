@@ -154,7 +154,7 @@ export default function TopFiveSongsByLikes() {
 
   const handleClick = (songId) => {
     const songIndex = likes.findIndex((song) => song.id === songId);
-    if (songIndex === -1) return; // Guard against no song found
+    if (songIndex === -1) return;
 
     const newLikes = [...likes];
     const song = newLikes[songIndex];

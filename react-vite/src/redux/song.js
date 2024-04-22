@@ -70,7 +70,8 @@ export const setCurrTime = (time) => ({
 });
 
 export const getSongsThunk = () => async (dispatch) => {
-  const res = await fetch("api/songs");
+  const res = await fetch("api/songs/");
+  console.log("hi");
   if (res.ok) {
     const songs = await res.json();
     dispatch(loadSongs(songs));
@@ -85,20 +86,21 @@ export const getUserSongsThunk = (userId) => async (dispatch) => {
     return songs;
   } else return res;
 };
+
 export const getSongThunk = (songId) => async (dispatch) => {
+  console.log("hi2");
   const res = await fetch(`/api/songs/${songId}`);
   if (res.ok) {
     const song = await res.json();
-    dispatch(loadSong(song));
+    await dispatch(loadSong(song));
     return song;
   }
 };
 
 export const createSongThunk = (data) => async (dispatch) => {
-  console.log("song.js----->>>>", data);
-  const res = await fetch("/api/songs", {
+  console.log("2 ----->>>>", data.get("song_url"));
+  const res = await fetch("/api/songs/new", {
     method: "POST",
-    // headers: { "Content-Type": "form-data" },
     body: data,
   });
 
@@ -130,6 +132,7 @@ export const editSongThunk = (song, songId) => async (dispatch) => {
     }
   }
 };
+
 export const deleteSongThunk = (songId) => async (dispatch) => {
   const res = await fetch(`/api/songs/${songId}`, {
     method: "DELETE",
@@ -145,6 +148,7 @@ export const deleteSongThunk = (songId) => async (dispatch) => {
     }
   }
 };
+
 export const addLikeThunk = (songId, current_user) => async (dispatch) => {
   const res = await fetch(`/api/songs/${songId}/likes`, {
     method: "POST",
@@ -197,8 +201,8 @@ export default function songReducer(state = initialState, action) {
     case EDIT_SONG: //Edit song
       return { ...state, singleSong: action.song };
     case DELETE_SONG: //Delete song
-      newState.allSongs = { ...state.allSongs };
-      delete newState.allSongs[action.songId];
+      newState.singleSong = { ...state.singleSong };
+      delete newState.singleSong[action.songId];
       return newState;
 
     case ADD_LIKE: {
