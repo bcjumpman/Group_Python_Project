@@ -12,7 +12,7 @@ const CreateSong = () => {
     const [songUrl, setSongUrl] = useState("");
     const [coverArt, setCoverArt] = useState("");
     const [genre, setGenre] = useState("");
-    const [isPrivate, setIsPrivate] = useState(false);
+    const [isPrivate, setIsPrivate] = useState(null);
     const [errors, setErrors] = useState({});
     const [submit, setSubmit] = useState(false)
     const { closeModal } = useModal();
@@ -43,7 +43,7 @@ const CreateSong = () => {
             setErrors(err)
             return err
         }
-        if (!isPrivate) {
+        if (isPrivate === null) {
             err.isPrivate = "Please indicate whether you want to make your song private or not"
             setErrors(err)
             return err
@@ -58,6 +58,7 @@ const CreateSong = () => {
             is_private: isPrivate
         }
         const newSong = await dispatch(createSongThunk(song))
+        console.log(newSong)
 
         if (newSong && newSong.id) {
             navigate(`/songs/${newSong.id}`)
@@ -124,18 +125,18 @@ const CreateSong = () => {
                             Private
                             <input
                                 type="radio"
-                                value={true}
-                                checked={isPrivate === true}
-                                onChange={() => setIsPrivate(true)}
+                                value="true"
+                                checked={isPrivate === "true"}
+                                onChange={() => setIsPrivate("true")}
                             />
                         </label>
                         <label>
                             Public
                             <input
                                 type="radio"
-                                value={false}
-                                checked={isPrivate === false}
-                                onChange={() => setIsPrivate(false)}
+                                value="false"
+                                checked={isPrivate === "false"}
+                                onChange={() => setIsPrivate("false")}
                             />
                         </label>
                     </div>

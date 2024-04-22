@@ -39,3 +39,7 @@ margin: 0 auto;
 button:hover {
   cursor: pointer;
 }
+
+.error-message, .err-msg {
+  color: red;
+}

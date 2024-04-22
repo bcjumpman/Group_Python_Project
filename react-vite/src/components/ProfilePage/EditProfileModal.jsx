@@ -48,24 +48,28 @@ const ProfileUpdate = () => {
             setErrors(err)
             return err
         }
-        if (!artistName) {
+        if (user.is_artist && !artistName) {
             err.artistName = "Name of artist is required"
             setErrors(err)
             return err
         }
 
-        const userData = {
+        let userData = {
             first_name: firstName,
             last_name: lastName,
             email,
             username,
-            artist_name: artistName,
-            artist_country: artistCountry,
-            artist_bio: artistBio
+        }
+        if (user.is_artist) {
+            userData = {
+                ...userData,
+                artist_name: artistName,
+                artist_country: artistCountry,
+                artist_bio: artistBio
+            }
         }
 
         const updateUser = await dispatch(editUserThunk(userId, userData))
-        console.log(userId)
         if (updateUser && updateUser.errors) {
             setErrors({ ...updateUser.errors, ...errors })
         } else {

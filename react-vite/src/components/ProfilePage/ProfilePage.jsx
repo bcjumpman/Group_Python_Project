@@ -30,7 +30,7 @@ const UserPage = () => {
     const user = useSelector(state => state.session.user ? state.session.user : null)
 
     const handleUpdateComment = userId => {
-        navigate(`/profile/${userId}/edit`)
+        navigate(`/users/${userId}/edit`)
     }
 
     // const songs = Object.values(songObj).filter(song => song.userId === parseInt(userId))
