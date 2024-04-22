@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { createSongThunk } from "../../redux/song";
+import { createSongThunk, getSongsThunk } from "../../redux/song";
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useModal } from '../../context/Modal'
@@ -50,7 +50,6 @@ const CreateSong = () => {
         }
         if (Object.keys(err).length > 0) return err;
 
-
         const formData = new FormData()
         formData.append('song_url', songUrl);
         formData.append('name', name),
@@ -62,13 +61,12 @@ const CreateSong = () => {
         const newSong = await dispatch(createSongThunk(formData))
 
         if (newSong && newSong.id) {
-            navigate(`/songs/${newSong.id}`)
             closeModal()
+            navigate(`/songs/${newSong.id}`)
         } else {
             setErrors({ ...errors })
         }
         // ...newSong.errors,
-
     }
     useEffect(() => {
         const validErrs = {}

@@ -71,18 +71,19 @@ export const setCurrTime = (time) => ({
 
 export const getSongsThunk = () => async (dispatch) => {
   const res = await fetch("api/songs/");
-  console.log('hi')
   if (res.ok) {
+    console.log('hi')
     const songs = await res.json();
+    console.log('lo')
     dispatch(loadSongs(songs));
     return songs;
-  } else return res;
+  } else return res.json();
 };
 export const getUserSongsThunk = (userId) => async (dispatch) => {
   const res = await fetch(`/api/users/${userId}/songs`);
   if (res.ok) {
     const songs = await res.json();
-    dispatch(loadUserSongs(songs));
+    // await dispatch(loadUserSongs(songs));
     return songs;
   } else return res;
 };
