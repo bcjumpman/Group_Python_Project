@@ -94,9 +94,8 @@ export const getSongThunk = (songId) => async (dispatch) => {
   }
 };
 
-
 export const createSongThunk = (data) => async (dispatch) => {
-  console.log('song.js----->>>>', data)
+  console.log("song.js----->>>>", data);
   const res = await fetch("/api/songs", {
     method: "POST",
     // headers: { "Content-Type": "form-data" },
@@ -166,7 +165,9 @@ export const deleteLikeThunk =
   };
 
 const initialState = {
-  allSongs: {},
+  allSongs: {
+    songs: [],
+  },
   singleSong: {},
   userSongs: {},
   userLikedSongs: {},
