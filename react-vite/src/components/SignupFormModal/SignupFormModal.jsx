@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
@@ -19,18 +19,17 @@ function SignupFormModal() {
   const [artistCountry, setArtistCountry] = useState(null)
   const [artistBio, setArtistBio] = useState(null)
   const [errors, setErrors] = useState({});
+  const [btnDisabled, setBtnDisabled] = useState(true)
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
-      return setErrors({
-        confirmPassword:
-          "Confirm Password field must be the same as the Password field",
-      });
-    }
+    const newErrors = {}
 
+    if (password !== confirmPassword) newErrors.confirmPassword = "Confirm Password field must be the same as the Password field"
+
+    if (Object.values(newErrors).length > 0) return setErrors(newErrors)
 
     const serverResponse = await dispatch(
       thunkSignup({
@@ -53,59 +52,43 @@ function SignupFormModal() {
       navigate('/discover')
     }
   };
-
-  // const invalidInfo = () => {
-  //   return (
-  //     !email ||
-  //     !username ||
-  //     !firstName ||
-  //     !lastName ||
-  //     !password ||
-  //     !confirmPassword ||
-  //     password === confirmPassword ||
-  //     !isArtist ||
-  //     !artistName ||
-  //     !artistCountry
-  //   );
-  // };
-
-  const disabledButton = () => {
-    return (firstName === "" || lastName === "" || email === "" || username === "" || confirmPassword === "" || password !== confirmPassword || isArtist === "")
-  }
+  // && (!artistName || !artistCountry || !artistBio)
+  useEffect(()=>{
+    if(!firstName || !lastName || !email || !username || !password || !confirmPassword || (isArtist === true && (!artistName || !artistCountry || !artistBio))) {
+      setBtnDisabled(true)
+    } else {
+      setBtnDisabled(false)
+    }
+  }, [firstName, lastName, email, username, password, confirmPassword, isArtist, artistName, artistCountry, artistBio])
 
   return (
     <div className="signupModalWrapper">
+      <div className="overlay">
       <h1>Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
       <form className="signupForm" onSubmit={handleSubmit}>
         <label>
-          First Name
+          <div>First Name</div>
           <input
             type="text"
-            className="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            required
           />
         </label>
         <label>
           Last Name
           <input
             type="text"
-            className="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            required
           />
         </label>
         <label>
           Email
           <input
             type="email"
-            className="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
           />
         </label>
         {errors.email && <p className="errorMessage">{errors.email}</p>}
@@ -113,10 +96,8 @@ function SignupFormModal() {
           Username
           <input
             type="text"
-            className="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            required
           />
         </label>
         {errors.username && <p className="errorMessage">{errors.username}</p>}
@@ -124,10 +105,8 @@ function SignupFormModal() {
           Password
           <input
             type="password"
-            className="text"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
         </label>
         {errors.password && <p className="errorMessage">{errors.password}</p>}
@@ -135,28 +114,24 @@ function SignupFormModal() {
           Confirm Password
           <input
             type="password"
-            className="text"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            required
           />
         </label>
         {errors.confirmPassword && <p className="errorMessage">{errors.confirmPassword}</p>}
-        <label>
+        <label id="isArtist">
           Are You An Artist?
           <input
             type="radio"
             value="true"
             checked={isArtist === true}
             onChange={() => setIsArtist(true)}
-            required
           /> Yes
           <input
             type="radio"
             value="false"
             checked={isArtist === false}
             onChange={() => setIsArtist(false)}
-            required
           /> No
         </label>
         {errors.isArtist && <p className="errorMessage">{errors.isArtist}</p>}
@@ -166,10 +141,9 @@ function SignupFormModal() {
               Artist Name
               <input
                 type="text"
-                className="text"
+
                 value={artistName}
                 onChange={(e) => setArtistName(e.target.value)}
-                required
               />
             </label>
             {errors.artistName && <p className="errorMessage">{errors.artistName}</p>}
@@ -177,18 +151,14 @@ function SignupFormModal() {
               Country
               <input
                 type="text"
-                className="text"
                 value={artistCountry}
                 onChange={(e) => setArtistCountry(e.target.value)}
-                required
               />
             </label>
             {errors.artistCountry && <p className="errorMessage">{errors.artistCountry}</p>}
             <label>
               Biography
               <textarea
-                // type="textarea"
-                className="textarea"
                 value={artistBio}
                 onChange={(e) => setArtistBio(e.target.value)}
               />
@@ -196,10 +166,9 @@ function SignupFormModal() {
             {errors.artistBio && <p className="errorMessage">{errors.artistBio}</p>}
           </>
         )}
-        {disabledButton() ?
-          <button className="disabledSignupButton" disabled={true} type="submit">Sign Up</button>
-          : <button className="signupModalButton" disabled={false} type="submit">Sign Up</button>}
+        <button className="signupModalButton" disabled={btnDisabled} type="submit">Sign Up</button>
       </form>
+      </div>
     </div>
   );
 }
