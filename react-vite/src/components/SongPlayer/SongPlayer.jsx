@@ -31,7 +31,7 @@ const SongPlayer = () => {
       <AudioPlayer
         ref={playerRef}
         volume={0.1}
-        showSkipControls={true}
+        // showSkipControls={true}
         showJumpControls={false}
         onPlayNext={playNextSong}
         src={songs.length > 0 ? songs[0].song_url : ""}
