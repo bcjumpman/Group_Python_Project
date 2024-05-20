@@ -26,7 +26,6 @@
 }
 
 .prof-piece, .info, .artist-piece, .artist-info {
-    /* text-align: center; */
     display: flex;
     flex-direction: column;
     width: fit-content;
@@ -38,8 +37,7 @@
     text-align: right;
 }
 
-button {
-    /* display: flex; */
+/* button {
     border-radius: 4px;
     color: yellow;
     background-color: silver;
@@ -49,4 +47,4 @@ button {
     width: 175px;
     justify-content: center;
     align-items: center;
-}
+} */

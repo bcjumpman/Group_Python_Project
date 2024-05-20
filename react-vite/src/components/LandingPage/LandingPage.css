@@ -8,22 +8,24 @@
 
 #landing-page-logo {
   width: 50%;
+  min-width: 350px;
 }
 
 .LP-button-container {
   display: flex;
   flex-direction: column;
-  width: 15%;
-  gap: 5px
+  gap: 5px;
+  width: 10%;
+  min-width: 100px;
 }
 
 .LP-button-container > button {
-  border: 3px solid #7d49c2;
+  border: 2px solid #7d49c2;
   background-color: #f1ed2a;
-  padding: 5px;
-  box-shadow: 3px 3px 5px black;
+  padding: 8px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.432);
   font-weight: bold;
-  color: #7d49c2
+  color: #7d49c2;
 }
 
 .LP-button-container > button:hover {
