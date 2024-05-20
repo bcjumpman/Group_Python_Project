@@ -1,10 +1,9 @@
 # Music Haze
-
-[1]: [https://github.com/bcjumpman/Music_Haze/assets/29231908/77994730-813b-41bd-b0e5-793def1f2336](url)
-[2]: [https://music-haze.onrender.com/](url)
-[3]: [https://github.com/BrandonKMoore](url)
-[4]: [https://github.com/bcjumpman](url)
-[5]: [https://github.com/Six5pAdes](url)
+[1]: https://github.com/bcjumpman/Music_Haze/assets/29231908/77994730-813b-41bd-b0e5-793def1f2336
+[2]: https://music-haze.onrender.com/
+[3]: https://github.com/BrandonKMoore
+[4]: https://github.com/bcjumpman
+[5]: https://github.com/Six5pAdes
 
 ## Live Link
 
