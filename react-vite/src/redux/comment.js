@@ -38,9 +38,7 @@ const deleteComment = (commentId) => {
 export const loadSongCommentsThunk = (songId) => async (dispatch) => {
   const res = await fetch(`/api/songs/${songId}/comments`);
   if (res.ok) {
-    console.log('hi')
     const comments = await res.json();
-    console.log('success')
     dispatch(loadSongComments(comments));
     return comments;
   }
@@ -66,7 +64,6 @@ export const createCommentThunk = (data) => async (dispatch) => {
   }
 };
 export const editCommentThunk = (comment) => async (dispatch) => {
-  console.log(comment)
   const res = await fetch(`/api/comments/${comment.id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },

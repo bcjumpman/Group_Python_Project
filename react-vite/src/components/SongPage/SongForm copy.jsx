@@ -66,8 +66,6 @@ const CreateSong = () => {
         formData.append('is_private', isPrivate)
         formData.append('duration', 88)
 
-        console.log(1, formData.get('song_url'))
-
         const newSong = await dispatch(createSongThunk(formData))
 
         if (newSong && newSong.id) {

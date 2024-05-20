@@ -52,7 +52,6 @@ def getAllSongs():
     per_song['comments'] = len(song.comments)
     all_songs.append(per_song)
 
-  print(len(all_songs))
   return jsonify({'songs': all_songs})
 
 #Upload a song
@@ -63,8 +62,6 @@ def post_song_route():
   form['csrf_token'].data = request.cookies['csrf_token']
   form['song_url'].data = request.form['song_url']
   form['cover_art'].data = request.form['cover_art']
-
-  print(request.form['song_url'])
 
   if form.validate_on_submit():
     new_song = post_song(form)

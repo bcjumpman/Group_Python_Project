@@ -31,7 +31,7 @@ export default function FeaturedSong() {
 
   const handleLike = (e, songId) => {
     e.preventDefault()
-    // e.stopPropagation()
+    e.stopPropagation()
 
     if (!randomSong) return;
 
@@ -68,7 +68,6 @@ export default function FeaturedSong() {
           </div>
         </div>
       </div>
-      </>
     </div>
   )
 }

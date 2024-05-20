@@ -70,7 +70,7 @@ export default function AllSongsByUser() {
               </div>
             </div>
           )
-        }) : console.log(!userSongs)}
+        }) : null}
       </div>
     )
   }

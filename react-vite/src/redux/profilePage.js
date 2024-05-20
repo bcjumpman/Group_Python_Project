@@ -17,7 +17,6 @@ export const deleteUser = (userId) => ({
 
 export const getUserThunk = (userId) => async (dispatch) => {
   const toInt = parseInt(userId);
-  console.log(toInt);
   const res = await fetch(`/api/users/${toInt}`);
   if (res.ok) {
     const givenUser = await res.json();
@@ -32,7 +31,6 @@ export const getUserThunk = (userId) => async (dispatch) => {
 };
 export const editUserThunk = (userId, updatedUserData) => async (dispatch) => {
   // const toInt = parseInt(userId);
-  console.log(userId);
   const res = await fetch(`/api/users/${userId}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },

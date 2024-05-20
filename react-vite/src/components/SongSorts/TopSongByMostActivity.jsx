@@ -51,7 +51,7 @@ export default function TopSongByMostActivity() {
                 </div>
               );
             })
-          : console.log(!topSongByMostActivity)}
+          : null}
       </div>
     );
   }

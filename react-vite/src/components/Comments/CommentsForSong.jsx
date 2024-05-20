@@ -90,7 +90,6 @@ export default function CommentsForSong() {
                 <button onClick={(e) => handleEdit(e, comment)}>edit</button>
                 <button onClick={(e) => handleDelete(e, comment)}>delete</button>
               </div> : null}
-            {console.log(comment.user_id, user_id)}
           </li>) : <h4>No Comments</h4>}
       </ul>
     </div>

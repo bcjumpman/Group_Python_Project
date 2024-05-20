@@ -72,9 +72,7 @@ export const setCurrTime = (time) => ({
 export const getSongsThunk = () => async (dispatch) => {
   const res = await fetch("api/songs/");
   if (res.ok) {
-    console.log('hi')
     const songs = await res.json();
-    console.log('lo')
     dispatch(loadSongs(songs));
     return songs;
   } else return res.json();
@@ -89,7 +87,6 @@ export const getUserSongsThunk = (userId) => async (dispatch) => {
 };
 
 export const getSongThunk = (songId) => async (dispatch) => {
-  console.log("hi2");
   const res = await fetch(`/api/songs/${songId}`);
   if (res.ok) {
     const song = await res.json();
@@ -99,7 +96,6 @@ export const getSongThunk = (songId) => async (dispatch) => {
 };
 
 export const createSongThunk = (data) => async (dispatch) => {
-  console.log("2 ----->>>>", data.get("song_url"));
   const res = await fetch("/api/songs/new", {
     method: "POST",
     body: data,

@@ -64,7 +64,6 @@ def post_song_route():
         # Call the combined function to handle song upload and creation
         new_song_data = post_song(form)
         return new_song_data
-    print(form.errors)
     return {"errors": form.errors}, 400
 
 # Get song by id

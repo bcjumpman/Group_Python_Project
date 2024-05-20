@@ -13,8 +13,6 @@ const ProfileUpdate = () => {
     const user = useSelector(state => state.session.user ? state.session.user : null)
     const currUser = useSelector(state => state.user.userProfile)
 
-    console.log(currUser)
-
     const [firstName, setFirstName] = useState(currUser?.first_name || "")
     const [lastName, setLastName] = useState(currUser?.last_name || "")
     const [email, setEmail] = useState(currUser?.email || "")

@@ -34,7 +34,6 @@ const toggleLPButtons = () => {
   } else {
     setModalIsActive(false)
   }
-  console.log(modalIsActive)
 }
 
   return (

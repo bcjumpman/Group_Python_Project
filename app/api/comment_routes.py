@@ -13,7 +13,6 @@ def getAllComments():
 def createComment():
   data = request.get_json()
 
-  print('--------->>>>', data)
   comment = Comment(
     body = data['body'],
     song_id = data['song_id'],
