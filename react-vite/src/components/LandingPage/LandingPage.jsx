@@ -22,11 +22,8 @@ function LandingPage() {
         password: "password",
       })
     );
-
     await navigate('/discover')
   }
-
-
 
 const toggleLPButtons = () => {
   if (modalIsActive === true){
@@ -37,6 +34,13 @@ const toggleLPButtons = () => {
 }
 
   return (
+    <div className="landing-page-background">
+      <div class="background-video">
+        <video autoPlay={true} loop={true} muted={true}>
+          <source src="../../../public/landing-video-bg.mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
       <div className='landing-page-container'>
         <img id="landing-page-logo" src={musichaze_logo} alt="music-haze-logo" />
         <div className={modalIsActive ? 'LP-button-container hidden' : 'LP-button-container'}>
@@ -45,16 +49,17 @@ const toggleLPButtons = () => {
               onButtonClick={toggleLPButtons}
               onModalClose={toggleLPButtons}
               modalComponent={<LoginFormModal />}
-            />
+              />
           <OpenModalButton
                 buttonText="Sign Up"
                 onButtonClick={toggleLPButtons}
                 onModalClose={toggleLPButtons}
                 modalComponent={<SignupFormModal />}
-            />
+                />
           <button className='entry' onClick={loginDemoUser}>Demo User</button>
         </div>
       </div>
+    </div>
   )
 }
 
