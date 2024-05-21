@@ -33,13 +33,6 @@ function LoginFormModal() {
     }
   };
 
-  const disabledButton = () => {
-    if (!email || !password) {
-      return true;
-    }
-    return false;
-  }
-
   useEffect(()=>{
     if (!email || !password) {
       setBtnDisabled(true)
