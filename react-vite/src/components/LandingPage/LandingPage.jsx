@@ -37,7 +37,7 @@ const toggleLPButtons = () => {
     <div className="landing-page-background">
       <div className="background-video">
         <video autoPlay={true} loop={true} muted={true}>
-          <source src="../../../public/landing-video-bg.mp4" />
+          <source src="/landing-video-bg.mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
