@@ -1,7 +1,8 @@
 .signupModalWrapper {
-    background-image: url('https://images.pexels.com/photos/1001850/pexels-photo-1001850.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-image: url('../../../public/landing-page-modal-bg.jpeg');
     background-attachment: fixed;
     background-position: center;
+    background-size: contain;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -73,7 +74,7 @@
     border: 3px solid #7d49c2;
     background-color: #f1ed2a;
     box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
-    width: 25rem;
+    width: 100%;
 }
 
 .signupModalButton:disabled {
@@ -81,8 +82,8 @@
     border: 3px solid #7e22ce59;
 }
 
-.signupModalButton:hover {
-    cursor: pointer;
+.signupModalButton:disabled:hover {
+    cursor: default;
 }
 
 .errorMessage {

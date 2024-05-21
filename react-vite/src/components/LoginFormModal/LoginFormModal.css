@@ -1,0 +1,71 @@
+.login-modal {
+  background-image: url('../../../public/landing-page-modal-bg.jpeg');
+  background-attachment: fixed;
+  background-position: center;
+  background-size: contain;
+  .overlay {
+    padding: 20px;
+    background-color: rgba(136, 146, 77, 0.664);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #7d49c2;
+    }
+  }
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 1em;
+}
+
+.login-labels {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: #7d49c2;
+  font-weight: bold;
+  :is(input){
+    width: 25rem;
+    background-color: #D4D4D4;
+  }
+}
+
+
+.login-inputs:focus {
+  border-color: #f1ed2a;
+  box-shadow: 0 0 10px #f1ee2a6b;
+  outline: none;
+}
+
+.login-button {
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 50px;
+  box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
+  background-color: #f1ed2a;
+  color: #7d49c2;
+  border: 3px solid #7d49c2;
+}
+
+.login-button:disabled {
+  background-color: lightgray;
+  border: 3px solid #7e22ce59;
+}
+
+.login-button:disabled:hover {
+  cursor: default;
+}
+
+.login-success:hover {
+  cursor: pointer;
+}
+
+.error {
+  font-size: .8em;
+  color: red;
+}
