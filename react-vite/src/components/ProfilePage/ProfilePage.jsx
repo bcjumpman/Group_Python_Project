@@ -62,72 +62,74 @@ const UserPage = () => {
               <p className="info">{user.username}</p>
             </p>
           </div>
-          <div id="artist-stuff">
-            {user.is_artist ? (
-              <>
-                <p className="artist-piece">
-                  Artist Name:
-                  <p className="artist-info">{user.artist_name}</p>
-                </p>
-                <p className="artist-piece">
-                  Country:
-                  <p className="artist-info">{user.artist_country}</p>
-                </p>
-                <p className="artist-piece">
-                  Biography:
-                  <p className="artist-info">{user.artist_bio}</p>
-                </p>
-              </>
-            ) : null}
-          </div>
+          {user.is_artist ? (
+            <div id="artist-stuff">
+                <>
+                  <p className="artist-piece">
+                    Artist Name:
+                    <p className="artist-info">{user.artist_name}</p>
+                  </p>
+                  <p className="artist-piece">
+                    Country:
+                    <p className="artist-info">{user.artist_country}</p>
+                  </p>
+                  <p className="artist-piece">
+                    Biography:
+                    <p className="artist-info">{user.artist_bio}</p>
+                  </p>
+                </>
+            </div>
+          ) : null}
         </div>
-        <OpenModalMenuItem
-          itemText="Edit Profile"
-          className="edit-button"
-          modalComponent={<ProfileUpdate toInt={toInt} />}
-        />
+      <section className="button-contain">
+        {user.is_artist ? (
+          <div>
+            <OpenModalMenuItem
+              itemText="New Song"
+              className="create-button"
+              modalComponent={<CreateSong />}
+            />
+          </div>
+        ) : null}
+        <div>
+          <OpenModalMenuItem
+            itemText="Edit Profile"
+            className="edit-button"
+            modalComponent={<ProfileUpdate toInt={toInt} />}
+          />
+        </div>
+        <div id="delete-user-but">
+          <OpenModalMenuItem
+            itemText="Delete User"
+            className="delete-button"
+            modalComponent={
+              <div id="confirm-delete">
+                <h2>Confirm Delete</h2>
+                <span>Are you sure you want to remove this user?</span>
+                <button
+                  id="delete-complete"
+                  type="button"
+                  onClick={() => handleDeleteProfile(user.id)}
+                >
+                  Yes (Delete User)
+                </button>
+                <button id="delete-cancel" type="button" onClick={closeModal}>
+                  No (Keep User)
+                </button>
+              </div>
+            }
+          />
+        </div>
+        <div id="logout-but">
+          <button onClick={logout}>Log Out</button>
+        </div>
+      </section>
       </section>
       <section className="songs-contain">
         <div id="artist-songs">
           {user.is_artist ? (
-            <>
-              <AllSongsByUser />
-              <OpenModalMenuItem
-                itemText="New Song"
-                className="create-button"
-                modalComponent={<CreateSong />}
-              />
-            </>
+            <AllSongsByUser />
           ) : null}
-        </div>
-      </section>
-      <section className="button-contain">
-        <div>
-          <div id="logout-but">
-            <button onClick={logout}>Log Out</button>
-          </div>
-          <div id="delete-user-but">
-            <OpenModalMenuItem
-              itemText="Delete User"
-              className="delete-button"
-              modalComponent={
-                <div id="confirm-delete">
-                  <h2>Confirm Delete</h2>
-                  <span>Are you sure you want to remove this user?</span>
-                  <button
-                    id="delete-complete"
-                    type="button"
-                    onClick={() => handleDeleteProfile(user.id)}
-                  >
-                    Yes (Delete User)
-                  </button>
-                  <button id="delete-cancel" type="button" onClick={closeModal}>
-                    No (Keep User)
-                  </button>
-                </div>
-              }
-            />
-          </div>
         </div>
       </section>
     </>

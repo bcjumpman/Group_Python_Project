@@ -50,3 +50,10 @@
 .song-card-icon-stats span {
   font-size: .8em;
 }
+
+.edit-or-delete {
+  display: flex;
+  flex-direction: column;
+  min-width: 100px;
+  justify-content: space-around;
+}
