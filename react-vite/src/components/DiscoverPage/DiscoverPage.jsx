@@ -45,8 +45,8 @@ export default function DiscoverPage() {
           </div>
         </div>
       </div>
-      <span className="v-breaker"></span>
-      <PlaylistPage props={{ sessionUser }} />
+      {/* <span className="v-breaker"></span>
+      <PlaylistPage props={{ sessionUser }} /> */}
     </div>
   );
 }
