@@ -28,10 +28,8 @@ export default function SongPage() {
         </div>
         <span className="h-breaker"></span>
         <h2>Comments</h2>
-        <div className="comments-container">
-          <div className="current-comments">
-            {song ? <CommentsForSong /> : null}
-          </div>
+        <div className="current-comments">
+          {song ? <CommentsForSong /> : null}
         </div>
       </div>
       {/* <span className="v-breaker"></span>

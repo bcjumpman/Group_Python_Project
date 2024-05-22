@@ -28,6 +28,7 @@ export default function CommentsForSong() {
 
     dispatch(createCommentThunk(data))
     dispatch(getSongThunk(id))
+    setNewComment('')
   }
 
   const handleEditSubmit = async (e) => {
@@ -72,7 +73,7 @@ export default function CommentsForSong() {
   }
 
   return (
-    <div>
+    <div className="comments-container">
       <form className="song-form" onSubmit={isEdit ? handleEditSubmit : handleSubmit} action="">
         <textarea value={newComment} onChange={(e) => setNewComment(e.target.value)} name="new-comment" id="new-comment" placeholder="Enter new comment"></textarea>
 
@@ -84,12 +85,16 @@ export default function CommentsForSong() {
       </form>
       <ul className="comments-section">
         {songComments.length ? songComments.map((comment) =>
-          <li key={comment.id}>{comment.body}
-            {comment.user_id === user_id ?
-              <div>
-                <button onClick={(e) => handleEdit(e, comment)}>edit</button>
-                <button onClick={(e) => handleDelete(e, comment)}>delete</button>
+          <li className="comment" key={comment.id}>
+            <div className="comment-header">
+            <div>Comment by <span className="comment-user">{comment.user}</span></div>            {comment.user_id === user_id ?
+              <div className="comment-owner-buttons">
+                <span onClick={(e) => handleEdit(e, comment)}>edit</span>
+                <span onClick={(e) => handleDelete(e, comment)}>delete</span>
               </div> : null}
+            </div>
+            <div className="comment-body">{comment.body}</div>
+
           </li>) : <h4>No Comments</h4>}
       </ul>
     </div>

@@ -1,4 +1,52 @@
 .song-form {
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.comments-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  list-style: none;
+  padding-left: 0;
+}
+
+.comments-container {
+  border: solid 2px white;
+  background-color: blanchedalmond;
+  padding: 10px 15px;
+}
+
+.comment {
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 7px 15px;
+  width: fit-content;
+}
+
+.comment-header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  font-size: .9em;
+  .comment-user {
+    font-weight: bold;
+  }
+}
+
+.comment-owner-buttons {
+  display: flex;
+  gap: 5px;
+  > :is(span){
+    font-size: .8em;
+    text-decoration: underline;
+    color: blue;
+  }
+}
+
+.comment-owner-buttons {
+  cursor: pointer;
 }

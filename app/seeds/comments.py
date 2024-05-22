@@ -34,7 +34,7 @@ def seed_comments():
     ]
 
 
-    num_comments = 20
+    num_comments = 500
 
     for _ in range(num_comments):
         song_id = random.choice(song_ids)
