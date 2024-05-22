@@ -100,6 +100,7 @@ export default function commentReducer(state = initialState, action) {
           newState.song[comment.id] = comment;
         });
       }
+
       return newState;
     case GET_USER_COMMENT:
       newState.user = {};

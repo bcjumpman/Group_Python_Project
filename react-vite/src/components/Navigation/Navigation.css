@@ -131,3 +131,7 @@
 #profile-dropdown:hover, #logout:hover, #prof-but:hover, #popup>*:hover {
   cursor: pointer;
 }
+
+.song-player {
+  padding-bottom: 80px;
+}
