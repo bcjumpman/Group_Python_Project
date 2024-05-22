@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getSongsThunk } from "../../redux/song";
 import { useEffect } from "react";
 import {
@@ -8,12 +8,12 @@ import {
   TopSongByMostActivity,
 } from "../SongSorts";
 import "./DiscoverPage.css";
-import PlaylistPage from "../PlaylistPage";
+// import PlaylistPage from "../PlaylistPage";
 // import { loadUserCommentsThunk } from "../../redux/comment";
 
 export default function DiscoverPage() {
   const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
+  // const sessionUser = useSelector((state) => state.session.user);
 
   dispatch(getSongsThunk())
 
