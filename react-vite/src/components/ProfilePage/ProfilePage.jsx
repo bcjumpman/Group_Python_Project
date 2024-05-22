@@ -41,7 +41,7 @@ const UserPage = () => {
   };
 
   return (
-    <>
+    <div className="page-container">
       <section className="profile-contain">
         <div id="prof-info">
           <div id="prof-stuff">
@@ -132,7 +132,7 @@ const UserPage = () => {
           ) : null}
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
