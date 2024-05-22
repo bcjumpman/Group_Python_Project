@@ -19,6 +19,7 @@ export default function CommentsForSong() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if(newComment.length < 1) return
 
     data = {
       song_id: id,
@@ -33,6 +34,7 @@ export default function CommentsForSong() {
 
   const handleEditSubmit = async (e) => {
     e.preventDefault()
+    if(newComment.length < 1) return
 
     data = {
       id: currComment.id,
@@ -76,12 +78,14 @@ export default function CommentsForSong() {
     <div className="comments-container">
       <form className="song-form" onSubmit={isEdit ? handleEditSubmit : handleSubmit} action="">
         <textarea value={newComment} onChange={(e) => setNewComment(e.target.value)} name="new-comment" id="new-comment" placeholder="Enter new comment"></textarea>
-
+        <div>
         {isEdit ?
-          <div>
+          <div className="edit-buttons">
             <button>Update Comment</button>
             <button onClick={(e) => handleEdit(e)}>Cancel</button>
-          </div> : <button>Leave Comment</button>}
+          </ div>
+           : <button>Leave Comment</button>}
+        </div>
       </form>
       <ul className="comments-section">
         {songComments.length ? songComments.map((comment) =>
