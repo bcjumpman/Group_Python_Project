@@ -1,4 +1,4 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import OpenModalButton from "../OpenModalButton";
@@ -8,9 +8,15 @@ import logo from "/musichaze_logo_yellowBG.png";
 import "./Navigation.css";
 import SongPlayer from "../SongPlayer";
 import Footer from "../Footer/Footer";
+import { useEffect } from "react";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
+  const navigate = useNavigate()
+
+  useEffect(()=>{
+    if (!sessionUser)  navigate("/")
+  }, [])
 
   const sessionLinks = sessionUser ? (
     <li>
@@ -33,6 +39,7 @@ function Navigation({ isLoaded }) {
     </>
   );
 
+  if(!sessionUser) return
   return (
     <>
       <ul id="navbar-full">

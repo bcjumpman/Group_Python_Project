@@ -75,43 +75,53 @@
   width: 100px;
 }
 
-#popup>*:first-child {
-  margin-bottom: 8px;
-}
-
 #profile-popup {
   position: absolute;
-  border: black solid 2px;
+  border: 2px solid #f1ed2a;
   border-radius: 5px;
   right: 0;
   top: 5px;
+  min-width: 50px;
   padding: 4px;
   display: flex;
   flex-direction: column;
-  background-color: rgb(246, 247, 248);
+  background-color: #6239ad;
   justify-content: center;
 }
 
-#profile-popup>*:nth-last-child(n + 2) {
-  margin-bottom: 8px;
-  border-bottom: 1px solid black;
-}
-
-#profile-popup>*:last-child {
-  align-self: center;
+#profile-popup > .menu-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: #f1ed2a;
+  text-align: left;
+  padding: 0;
+  font-size: 0.9em;
+  min-width: 150px;
+  .credentials {
+    display: flex;
+    flex-direction: column;
+  }
+  :is(a) {
+    color: #f1ed2a;
+  }
 }
 
 #profile-popup button {
-  background-color: silver;
-  align-self: center;
+  border-color: rgba(255, 255, 255, 0.3);
+  background-color: #f1ed2a;
+  color: #6239ad;
 }
 
 #prof-but {
-  border-radius: 20px;
+  border-radius: 50%;
+  width: 30px;
   height: 30px;
-  position: static;
   display: inline-block;
-  width: 50px;
+  background-color: #f1ed2a;
+  border-color: rgba(255, 255, 255, 0.3);
+  font-size: 1em;
+  color: #6239ad;
 }
 
 #nav-link {
@@ -132,6 +142,6 @@
   cursor: pointer;
 }
 
-/* .song-player {
-  padding-bottom: 80px;
-} */
+.profile-button{
+  text-align: right;
+}
