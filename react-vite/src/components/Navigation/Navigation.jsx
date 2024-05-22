@@ -16,7 +16,7 @@ function Navigation({ isLoaded }) {
 
   useEffect(()=>{
     if (!sessionUser)  navigate("/")
-  }, [])
+  }, [sessionUser, navigate])
 
   const sessionLinks = sessionUser ? (
     <li>
