@@ -14,41 +14,19 @@ const CreateSong = () => {
     const [genre, setGenre] = useState("");
     const [isPrivate, setIsPrivate] = useState(null);
     const [errors, setErrors] = useState({});
-    const [submit, setSubmit] = useState(false)
     const { closeModal } = useModal();
 
 
     const handleSubmit = async e => {
         e.preventDefault()
         const err = {}
-        setSubmit(true)
 
-        if (!name) {
-            err.name = "Song title is required"
-            setErrors(err)
-            return err
-        }
-        if (!songUrl) {
-            err.songUrl = "URL is required"
-            setErrors(err)
-            return err
-        }
-        if (!coverArt) {
-            err.coverArt = "Cover art is required"
-            setErrors(err)
-            return err
-        }
-        if (!genre) {
-            err.genre = "Genre is required"
-            setErrors(err)
-            return err
-        }
-        if (isPrivate === null) {
-            err.isPrivate = "Please indicate whether you want to make your song private or not"
-            setErrors(err)
-            return err
-        }
-        if (Object.keys(err).length > 0) return err;
+        if (!name) err.name = "Song title is required"
+        if (!songUrl) err.songUrl = "URL is required"
+        if (!coverArt) err.coverArt = "Cover art is required"
+        if (!genre) err.genre = "Genre is required"
+        if (isPrivate === null) err.isPrivate = "Please indicate whether you want to make your song private or not"
+        if (Object.keys(err).length > 0) return setErrors(err);
 
         const formData = new FormData()
         formData.append('song_url', songUrl);
@@ -66,17 +44,7 @@ const CreateSong = () => {
         } else {
             setErrors({ ...errors })
         }
-        // ...newSong.errors,
     }
-    useEffect(() => {
-        const validErrs = {}
-        if (submit && !name) validErrs.name = "Country is required"
-        if (submit && !songUrl) validErrs.songUrl = "URL is required"
-        if (submit && !coverArt) validErrs.coverArt = "Cover art is required"
-        if (submit && !genre) validErrs.genre = "Genre is required"
-        if (submit && !isPrivate) validErrs.isPrivate = "Please select public or private"
-        setErrors(validErrs)
-    }, [name, songUrl, coverArt, genre, isPrivate, submit])
 
     const genres = ["pop", "rock", "jazz", "hip hop", "country", "classical", "electronic", "blues", "folk", "reggae", "other"]
 
@@ -142,7 +110,7 @@ const CreateSong = () => {
                                 <span>Private</span>
                                 <input
                                     type="radio"
-                                    value="true"
+                                    value={true}
                                     checked={isPrivate === "true"}
                                     onChange={() => setIsPrivate("true")}
                                 />
@@ -151,7 +119,7 @@ const CreateSong = () => {
                                 <span>Public</span>
                                 <input
                                     type="radio"
-                                    value="false"
+                                    value={false}
                                     checked={isPrivate === "false"}
                                     onChange={() => setIsPrivate("false")}
                                 />

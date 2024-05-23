@@ -18,38 +18,17 @@ const SongUpdate = () => {
     const [genre, setGenre] = useState(currUser?.genre || "Select genre")
     const [isPrivate, setIsPrivate] = useState(currUser?.is_private || false)
     const [errors, setErrors] = useState({})
-    const [submit, setSubmit] = useState(false)
 
     const handleSubmit = async e => {
         e.preventDefault()
         const err = {}
-        setSubmit(true)
 
-        if (!name) {
-            err.name = "Song title is required"
-            setErrors(err)
-            return err
-        }
-        if (!songUrl) {
-            err.songUrl = "URL is required"
-            setErrors(err)
-            return err
-        }
-        if (!coverArt) {
-            err.coverArt = "Cover art is required"
-            setErrors(err)
-            return err
-        }
-        if (!genre) {
-            err.genre = "Genre is required"
-            setErrors(err)
-            return err
-        }
-        if (!isPrivate) {
-            err.isPrivate = "Please indicate whether you want to make your song private or not"
-            setErrors(err)
-            return err
-        }
+        if (!name) err.name = "Song title is required"
+        if (!songUrl) err.songUrl = "URL is required"
+        if (!coverArt) err.coverArt = "Cover art is required"
+        if (!genre) err.genre = "Genre is required"
+        if (!isPrivate) err.isPrivate = "Please select private or public"
+        if (Object.keys(err).length > 0) return setErrors(err);
 
         let songData = {
             name,
@@ -68,53 +47,51 @@ const SongUpdate = () => {
         }
     }
 
-    useEffect(() => {
-        const validErrs = {}
-        if (submit && !name) validErrs.name = "Song title is required"
-        if (submit && !songUrl) validErrs.songUrl = "URL is required"
-        if (submit && !coverArt) validErrs.email = "Cover art is required"
-        if (submit && !genre) validErrs.username = "Genre is required"
-        if (submit && !isPrivate) validErrs.artistName = "Please indicate whether you want to make your song private or not"
-        setErrors(validErrs)
-    }, [name, songUrl, coverArt, genre, isPrivate, submit])
-
     const genres = ["pop", "rock", "jazz", "hip hop", "country", "classical", "electronic", "blues", "folk", "reggae", "other"]
 
-
     return (
-        <div id="form-modal-contain">
-            <form onSubmit={handleSubmit} id="form">
+        <div id="song-edit">
+            <form onSubmit={handleSubmit} id="full-form">
                 <h2>Update Song Info</h2>
                 <div>
-                    <label className="user-label">
-                        Song Title
+                    <label className="spot-label">
+                    <div className="label-n-err">
+                        <span>Title</span>
+                        {errors.name && <p className="err">{errors.name}</p>}
+                    </div>
                         <input
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
                     </label>
-                    {errors.name && <p className="err-msg">{errors.name}</p>}
-                    <label className="user-label">
-                        Song URL
+                    <label className="spot-label">
+                    <div className="label-n-err">
+                        <span>Upload Song</span>
+                        {errors.songUrl && <p className="err">{errors.songUrl}</p>}
+                    </div>
                         <input
                             type="file"
                             value={songUrl}
                             onChange={(e) => setSongUrl(e.target.value)}
                         />
                     </label>
-                    {errors.songUrl && <p className="err-msg">{errors.songUrl}</p>}
-                    <label className="user-label">
-                        Cover Art
+                    <label className="spot-label">
+                    <div className="label-n-err">
+                        <span>Select Cover Art</span>
+                        {errors.coverArt && <p className="err">{errors.coverArt}</p>}
+                    </div>
                         <input
                             type="file"
                             value={coverArt}
                             onChange={(e) => setCoverArt(e.target.value)}
                         />
                     </label>
-                    {errors.coverArt && <p className="err-msg">{errors.coverArt}</p>}
                     <label className="spot-label">
-                        Genre
+                    <div className="label-n-err">
+                        <span>Genre</span>
+                        {errors.genre && <p className="err">{errors.genre}</p>}
+                    </div>
                         <select value={genre} onChange={(e) => setGenre(e.target.value)}>
                             <option value="">Select Genre</option>
                             {genres.map((genre, index) => (
@@ -122,10 +99,10 @@ const SongUpdate = () => {
                             ))}
                         </select>
                     </label>
-                    {errors.genre && <p className="err-msg">{errors.genre}</p>}
                     <div className="pub-or-priv">
+                        <span>Select visibility:</span>
                         <label>
-                            Private
+                            <span>Private</span>
                             <input
                                 type="radio"
                                 value={true}
@@ -134,7 +111,7 @@ const SongUpdate = () => {
                             />
                         </label>
                         <label>
-                            Public
+                            <span>Public</span>
                             <input
                                 type="radio"
                                 value={false}
@@ -144,8 +121,10 @@ const SongUpdate = () => {
                         </label>
                     </div>
                 </div>
-                <button id="submit" type="submit">Update Song</button>
-                <button id="cancel" type="button" onClick={closeModal}>Cancel Update</button>
+                <div id="button-contain">
+                    <button id="submit" type="submit">Update Song</button>
+                    <button id="cancel" type="button" onClick={closeModal}>Cancel</button>
+                </div>
             </form>
         </div>
     )
