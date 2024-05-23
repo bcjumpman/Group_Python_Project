@@ -1,8 +1,32 @@
-#form {
-    border-radius: 20px;
+#edit-profile {
+    background-color: #7e22ce;
+    color: #f1ed2a;
+    :is(button), .button{
+        padding: 5px 15px;
+        color: #7d49c2;
+        background-color: #f1ed2a;
+        border-color: #9382cc;
+        border-radius: 4px;
+        box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
+    }
+}
+
+#edit-profile #form {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 400px;
+    padding: 20px;
+    gap: 20px;
+    > .form-inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    > .form-buttons {
+        display: flex;
+        justify-content: center;
+    }
 }
 
 #form > h2 {
@@ -15,41 +39,28 @@
 .user-label {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 10px;
 }
 
-.user-label label {
-    margin-top: 5px;
-}
 
-/* .pub-or-priv {
+.edit-profile .pub-or-priv {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
-} */
+}
 
 .pub-or-priv label {
     margin: 0 10px;
 }
 
-.text {
-    width: 25rem;
-    margin: 5px 20px;
-    background-color: #D4D4D4;
+#edit-profile :is(textarea) {
+    height: 5em;
+    resize: none;
 }
 
-.textarea {
-    width: 25rem;
-    margin: 5px 20px;
-    background-color: #D4D4D4;
-    text-align: center;
-    resize: both;
-}
-
-.errorMessage {
+.err-msg {
     color: red;
+    font-size: .8em;
 }
 
 #submit, #cancel {

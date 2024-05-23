@@ -92,12 +92,15 @@ const ProfileUpdate = () => {
     }, [firstName, lastName, email, username, isArtist, artistName, submit])
 
     return (
-        <div id="form-modal-contain">
+        <div id="edit-profile">
             <form onSubmit={handleSubmit} id="form">
                 <h2>Update Profile Info</h2>
-                <div>
+                <div className="form-inputs">
                     <label className="user-label">
-                        First Name
+                        <div className="label-n-err">
+                            <span>First Name</span>
+                            {errors.firstName && <p className="err-msg">{errors.firstName}</p>}
+                        </div>
                         <input
                             type="text"
                             placeholder="First Name"
@@ -105,9 +108,11 @@ const ProfileUpdate = () => {
                             onChange={(e) => setFirstName(e.target.value)}
                         />
                     </label>
-                    {errors.firstName && <p className="err-msg">{errors.firstName}</p>}
                     <label className="user-label">
-                        Last Name
+                    <div className="label-n-err">
+                        <span>Last Name</span>
+                        {errors.lastName && <p className="err-msg">{errors.lastName}</p>}
+                    </div>
                         <input
                             type="text"
                             placeholder="Last Name"
@@ -115,9 +120,11 @@ const ProfileUpdate = () => {
                             onChange={(e) => setLastName(e.target.value)}
                         />
                     </label>
-                    {errors.lastName && <p className="err-msg">{errors.lastName}</p>}
                     <label className="user-label">
-                        Email
+                    <div className="label-n-err">
+                        <span>Email</span>
+                        {errors.email && <p className="err-msg">{errors.email}</p>}
+                    </div>
                         <input
                             type="text"
                             placeholder="Email"
@@ -125,9 +132,11 @@ const ProfileUpdate = () => {
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </label>
-                    {errors.email && <p className="err-msg">{errors.email}</p>}
                     <label className="user-label">
-                        Username
+                    <div className="label-n-err">
+                        <span>Username</span>
+                        {errors.username && <p className="err-msg">{errors.username}</p>}
+                    </div>
                         <input
                             type="text"
                             placeholder="Username"
@@ -135,33 +144,35 @@ const ProfileUpdate = () => {
                             onChange={(e) => setUsername(e.target.value)}
                         />
                     </label>
-                    {errors.username && <p className="err-msg">{errors.username}</p>}
                     <div className="pub-or-priv">
                         <span>Artist: </span>
                         <label>
                             True
                             <input
                                 type="radio"
-                                value="true"
+                                value={true}
                                 checked={isArtist === true}
-                                onChange={() => setIsArtist("true")}
+                                onChange={() => setIsArtist(true)}
                             />
                         </label>
                         <label>
                             False
                             <input
                                 type="radio"
-                                value="false"
+                                value={false}
                                 checked={isArtist === false}
-                                onChange={() => setIsArtist("false")}
+                                onChange={() => setIsArtist(false)}
                             />
                         </label>
-                    </div>
                     {errors.isArtist && <p className="err-msg">{errors.isArtist}</p>}
+                    </div>
                     {user.is_artist && (
                         <>
                             <label className="user-label">
-                                Artist Name
+                            <div className="label-n-err">
+                                <span>Artist Name</span>
+                                {errors.artistName && <p className="err-msg">{errors.artistName}</p>}
+                            </div>
                                 <input
                                     type="text"
                                     placeholder="Artist Name"
@@ -169,9 +180,10 @@ const ProfileUpdate = () => {
                                     onChange={(e) => setArtistName(e.target.value)}
                                 />
                             </label>
-                            {errors.artistName && <p className="err-msg">{errors.artistName}</p>}
                             <label className="user-label">
-                                Country
+                            <div className="label-n-err">
+                                <span>Country</span>
+                            </div>
                                 <input
                                     type="text"
                                     placeholder="Country"
@@ -180,7 +192,9 @@ const ProfileUpdate = () => {
                                 />
                             </label>
                             <label className="user-label">
-                                Biography
+                                <div className="label-n-err">
+                                    <span>Biography</span>
+                                </div>
                                 <textarea
                                     type="text"
                                     placeholder="Bio"
@@ -190,8 +204,10 @@ const ProfileUpdate = () => {
                             </label>
                         </>)}
                 </div>
-                <button id="submit" type="submit">Update User</button>
-                <button id="cancel" type="button" onClick={closeModal}>Cancel Update</button>
+                <div className="form-buttons">
+                    <button id="submit" type="submit">Update User</button>
+                    <button id="cancel" type="button" onClick={closeModal}>Cancel Update</button>
+                </div>
             </form >
         </div >
     )
