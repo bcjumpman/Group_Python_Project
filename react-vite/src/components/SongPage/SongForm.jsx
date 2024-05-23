@@ -74,7 +74,7 @@ const CreateSong = () => {
         if (submit && !songUrl) validErrs.songUrl = "URL is required"
         if (submit && !coverArt) validErrs.coverArt = "Cover art is required"
         if (submit && !genre) validErrs.genre = "Genre is required"
-        if (submit && !isPrivate) validErrs.isPrivate = "Please indicated whether you want to make your song private or not"
+        if (submit && !isPrivate) validErrs.isPrivate = "Please select public or private"
         setErrors(validErrs)
     }, [name, songUrl, coverArt, genre, isPrivate, submit])
 
@@ -84,18 +84,23 @@ const CreateSong = () => {
         <div id="song-new">
             <form onSubmit={handleSubmit} id='full-form' encType="multipart/form-data">
                 <h2>Create a New Song</h2>
-                <div>
+                <div className="input-fields">
                     <label className="spot-label">
-                        Title
+                    <div className="label-n-err">
+                        <span>Title</span>
+                        {errors.name && <p className="err">{errors.name}</p>}
+                    </div>
                         <input
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
                     </label>
-                    {errors.name && <p className="err-msg">{errors.name}</p>}
                     <label className="upload-label">
-                        Link to Song
+                    <div className="label-n-err">
+                        <span>Upload Song</span>
+                        {errors.songUrl && <p className="err">{errors.songUrl}</p>}
+                    </div>
                         <input
                             type="file"
                             label='Upload song'
@@ -105,21 +110,24 @@ const CreateSong = () => {
                             onChange={(e) => setSongUrl(e.target.files[0])}
                         />
                     </label>
-                    {errors.songUrl && <p className="err-msg">{errors.songUrl}</p>}
                     <label className="upload-label">
-                        Link to Cover Art
+                    <div className="label-n-err">
+                        <span>Select Cover Art</span>
+                        {errors.coverArt && <p className="err">{errors.coverArt}</p>}
+                    </div>
                         <input
                             type="file"
                             label='Upload coverart'
                             accept='image/*'
                             // buttonAfter={uploadFileButton}
-
                             onChange={(e) => setCoverArt(e.target.files[0])}
                         />
                     </label>
-                    {errors.coverArt && <p className="err-msg">{errors.coverArt}</p>}
                     <label className="spot-label">
-                        Genre
+                        <div className="label-n-err">
+                            <span>Genre</span>
+                            {errors.genre && <p className="err">{errors.genre}</p>}
+                        </div>
                         <select value={genre} onChange={(e) => setGenre(e.target.value)}>
                             <option value="">Select Genre</option>
                             {genres.map((genre, index) => (
@@ -127,28 +135,30 @@ const CreateSong = () => {
                             ))}
                         </select>
                     </label>
-                    {errors.genre && <p className="err-msg">{errors.genre}</p>}
-                    <div className="pub-or-priv">
-                        <label>
-                            Private
-                            <input
-                                type="radio"
-                                value="true"
-                                checked={isPrivate === "true"}
-                                onChange={() => setIsPrivate("true")}
-                            />
-                        </label>
-                        <label>
-                            Public
-                            <input
-                                type="radio"
-                                value="false"
-                                checked={isPrivate === "false"}
-                                onChange={() => setIsPrivate("false")}
-                            />
-                        </label>
+                    <div className="song-visibility">
+                        <div className="pub-or-priv">
+                        <span>Select visibility:</span>
+                            <label>
+                                <span>Private</span>
+                                <input
+                                    type="radio"
+                                    value="true"
+                                    checked={isPrivate === "true"}
+                                    onChange={() => setIsPrivate("true")}
+                                />
+                            </label>
+                            <label>
+                                <span>Public</span>
+                                <input
+                                    type="radio"
+                                    value="false"
+                                    checked={isPrivate === "false"}
+                                    onChange={() => setIsPrivate("false")}
+                                />
+                            </label>
+                        </div>
+                        {errors.isPrivate && <p className="err">{errors.isPrivate}</p>}
                     </div>
-                    {errors.isPrivate && <p className="err-msg">{errors.isPrivate}</p>}
                 </div>
                 <div id="button-contain">
                     <button id="submit-button" type="submit">Create Song</button>

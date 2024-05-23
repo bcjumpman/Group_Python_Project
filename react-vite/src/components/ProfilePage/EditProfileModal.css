@@ -23,12 +23,12 @@
     margin-top: 5px;
 }
 
-.pub-or-priv {
+/* .pub-or-priv {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
-}
+} */
 
 .pub-or-priv label {
     margin: 0 10px;

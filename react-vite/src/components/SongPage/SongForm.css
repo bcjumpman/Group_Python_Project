@@ -1,70 +1,54 @@
-#full-formform {
-    border-radius: 20px;
+#song-new {
+    background-color: #7e22ce;
+    color: #f1ed2a;
+    padding: 20px;
+    :is(button), .button{
+        padding: 5px 15px;
+        color: #7d49c2;
+        background-color: #f1ed2a;
+        border-color: #9382cc;
+        border-radius: 4px;
+        box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
+    }
+}
+
+#full-form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
 #full-form > h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 15px;
+
 }
 
 .spot-label, .upload-label {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 10px;
-}
-
-.spot-label, .upload-label label {
-    margin-top: 5px;
-}
-
-.upload-label {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 0;
 }
 
 .pub-or-priv {
     display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10px;
+    gap: 5px;
+    > :is(label){
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
 }
 
-.pub-or-priv label {
-    margin: 0 10px;
-}
-
-.text {
-    width: 25rem;
-    margin: 5px 20px;
-    background-color: #D4D4D4;
-}
-
-.textarea {
-    width: 25rem;
-    margin: 5px 20px;
-    background-color: #D4D4D4;
-    text-align: center;
-    resize: both;
-}
-
-.errorMessage {
+#song-new .err {
     color: red;
+    font-size: .7em;
 }
 
-#button-contain {
+#full-form > #button-contain {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin: 20px;
+    gap: 15px;
 }
 
 #submit, #cancel {
@@ -73,4 +57,22 @@
     width: auto;
     height: auto;
     margin: 10px;;
+}
+
+.label-n-err {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+}
+
+.song-visibility {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.input-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }

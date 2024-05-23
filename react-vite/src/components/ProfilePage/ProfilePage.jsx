@@ -100,7 +100,7 @@ const UserPage = () => {
         </div>
         <div id="delete-user-but">
           <OpenModalMenuItem
-            itemText="Delete User"
+            itemText="Delete Account"
             className="delete-button"
             modalComponent={
               <div id="confirm-delete">
