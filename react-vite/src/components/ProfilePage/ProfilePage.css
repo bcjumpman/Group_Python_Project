@@ -49,3 +49,30 @@
     background-color: #f1ed2a;
     border-color: #9382cc;
 }
+
+#confirm-delete-modal {
+    background-color: #7e22ce;
+    color: #f1ed2a;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+}
+
+.delete-selection {
+    display: flex;
+    justify-content: space-around;
+    > :is(button), .button{
+        padding: 5px 15px;
+        color: #7d49c2;
+        background-color: #f1ed2a;
+        border-color: #9382cc;
+        border-radius: 4px;
+        box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
+    }
+    > #delete-user {
+        background-color: red;
+        border-color: rgba(255, 0, 0, 0.3);
+        color: black;
+    }
+}

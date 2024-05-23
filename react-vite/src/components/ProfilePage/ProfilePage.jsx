@@ -103,19 +103,21 @@ const UserPage = () => {
             itemText="Delete Account"
             className="delete-button"
             modalComponent={
-              <div id="confirm-delete">
+              <div id="confirm-delete-modal">
                 <h2>Confirm Delete</h2>
                 <span>Are you sure you want to remove this user?</span>
-                <button
-                  id="delete-complete"
-                  type="button"
-                  onClick={() => handleDeleteProfile(user.id)}
-                >
-                  Yes (Delete User)
-                </button>
-                <button id="delete-cancel" type="button" onClick={closeModal}>
-                  No (Keep User)
-                </button>
+                <div className="delete-selection">
+                  <button
+                    id="delete-user"
+                    type="button"
+                    onClick={() => handleDeleteProfile(user.id)}
+                  >
+                    Yes (Delete User)
+                  </button>
+                  <button type="button" onClick={closeModal}>
+                    No (Keep User)
+                  </button>
+                </div>
               </div>
             }
           />
