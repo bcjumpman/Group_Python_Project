@@ -53,7 +53,7 @@ export default function SongPage() {
   const dispatch = useDispatch();
   const { id } = useParams(); // Extract song ID from URL
 
-  console.log("SONG PAGE: PARAM ID>>>", id);
+  // console.log("SONG PAGE: PARAM ID>>>", id);
   // Fetch the selected song when the component mounts or song ID changes
   useEffect(() => {
     dispatch(getSongThunk(id));
@@ -61,7 +61,7 @@ export default function SongPage() {
 
   // Get the selected song from the Redux store
   const selectedSong = useSelector((state) => state.song.singleSong.song);
-  console.log("SONG PAGE: SELECTED SONG URL>>>", selectedSong?.song_url);
+  // console.log("SONG PAGE: SELECTED SONG URL>>>", selectedSong?.song_url);
   // Play the selected song
   useEffect(() => {
     if (selectedSong && selectedSong?.song_url) {
