@@ -48,13 +48,13 @@ export default function SongPlayerContext({ children }) {
           song_url:
             "https://musichazeapp.s3.us-west-1.amazonaws.com/music_haze_tracks/Brisket+Taco+-+Cumbia+Deli.mp3",
           songName: "Senorita",
-          songId: 5,
+          songId: 1,
         },
         {
           song_url:
             "https://musichazeapp.s3.us-west-1.amazonaws.com/music_haze_tracks/African+Fella+-+Cumbia+Deli.mp3",
           songName: "Senorita",
-          songId: 5,
+          songId: 0,
         },
         {
           song_url:
