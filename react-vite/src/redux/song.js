@@ -45,9 +45,9 @@ const deleteLike = (songId, current_user, userId) => ({
   type: DELETE_LIKE,
   payload: { songId, current_user, userId },
 });
-export const playSong = (song) => ({
+export const playSong = (song_url) => ({
   type: PLAY_SONG,
-  song,
+  song_url,
 });
 export const getUserLikedSongs = (songs) => ({
   type: GET_USER_LIKED_SONGS,
@@ -286,8 +286,10 @@ export default function songReducer(state = initialState, action) {
       return newState;
     }
 
-    case PLAY_SONG: //Playing song
-      return { ...state, playSong: action.song };
+    // case PLAY_SONG:
+    //   return { ...state, playSong: action.song };
+    case PLAY_SONG: // Play song
+      return { ...state, playSong: action.song_url };
     case RESET_SINGLE_SONG:
       return { ...state, singleSong: {} };
     case IS_PLAYING:
